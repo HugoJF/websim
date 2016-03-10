@@ -119,15 +119,16 @@ $factory->define(App\CommentVotes::class, function (Faker\Generator $faker) {
         'direction' => $faker->boolean(65),
     ];
 });
-/**
+/*
  * App\Category factory
  */
 
-$factory->define(App\Category::class, function(Faker\Generator $faker) {
+$factory->define(App\Category::class, function (Faker\Generator $faker) {
     $created_at = $faker->dateTimeThisMonth()->format('Y-m-d H:i:s');
+
     return [
-        'name' => $faker->sentence,
+        'name'       => $faker->sentence,
         'created_at' => $created_at,
-        'updated_at' => $created_at
+        'updated_at' => $created_at,
     ];
 });
