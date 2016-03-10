@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         factory(App\User::class, 50)->create()->each(function (App\User $u) {
             $u->questions()->saveMany(factory(App\Question::class, 5)->create()->each(function (App\Question $q) use ($u) {
                 $q->comments()->saveMany(factory(App\Comment::class, 5)->create([
@@ -53,11 +52,10 @@ class DatabaseSeeder extends Seeder
 
         });
 
-
         $root = \App\Category::create(['name' => 'Root']);
         $root->makeRoot();
 
-        factory(App\Category::class, 25)->create()->each(function (App\Category $c) use($root) {
+        factory(App\Category::class, 25)->create()->each(function (App\Category $c) use ($root) {
             $c->makeChildOf($root);
             $c->user()->associate(App\User::all()->random());
             $c->save();
@@ -87,7 +85,5 @@ class DatabaseSeeder extends Seeder
                  });
              });
          });*/
-
-
     }
 }
