@@ -23,8 +23,8 @@ class TestAttempt extends Model
         return $this->hasMany('App\Answer', 'attempt_id');
     }
 
-
-    public function getResultURL() {
-        return url('attempts/result/' . $this->id);
+    public function getResultURL()
+    {
+        return url('attempts/result/'.$this->id);
     }
 }
