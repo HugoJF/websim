@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Answers');
     }
 
+    public function categories()
+    {
+        return $this->hasMany('App\Category');
+    }
+
     /**
      * Check if user is Administrator
      *

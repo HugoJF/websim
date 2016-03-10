@@ -164,6 +164,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
     ],
 

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         factory(App\User::class, 50)->create()->each(function (App\User $u) {
             $u->questions()->saveMany(factory(App\Question::class, 5)->create()->each(function (App\Question $q) use ($u) {
                 $q->comments()->saveMany(factory(App\Comment::class, 5)->create([
@@ -52,5 +53,42 @@ class DatabaseSeeder extends Seeder
             }));
 
         });
+
+
+        $root = \App\Category::create(['name' => 'Root']);
+        $root->makeRoot();
+
+        factory(App\Category::class, 25)->create()->each(function (App\Category $c) use($root) {
+            $c->makeChildOf($root);
+            $c->user()->associate(App\User::all()->random());
+            $c->save();
+        });
+
+        factory(App\Category::class, 70)->create()->each(function (App\Category $c) {
+            $c->makeChildOf(App\Category::where('depth', 1)->get()->random());
+            $c->user()->associate(App\User::all()->random());
+            $c->save();
+        });
+
+        factory(App\Category::class, 130)->create()->each(function (App\Category $c) {
+            $c->makeChildOf(App\Category::where('depth', 2)->get()->random());
+            $c->user()->associate(App\User::all()->random());
+            $c->save();
+        });
+
+        /* factory(App\Category::class, 25)->make(['name' => '1'])->each(function (App\Category $c1) use($root) {
+             $c1->makeChildOf($root);
+             $c1->save();
+             factory(App\Category::class, 1)->make(['name' => 2])->each(function (App\Category $c2) use ($root, $c1) {
+                 $c2->makeChildOf($c1);
+                 $c2->save();
+                 factory(App\Category::class, 2)->make()->each(function (App\Category $c3) use ($c2) {
+                     $c3->makeChildOf($c2);
+                     $c3->save();
+                 });
+             });
+         });*/
+
+
     }
 }
