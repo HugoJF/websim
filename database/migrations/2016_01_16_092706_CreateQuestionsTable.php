@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateQuestionsTable extends Migration
 {
@@ -17,14 +17,14 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
 
             // What user created the question
-			$table->integer('user_id')->unsigned()->nullable();
-			$table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
 
             // The question title
             $table->string('question_title');
 
             // Information: possible answers
-			$table->text('information');
+            $table->text('information');
 
             // Timestamps
             $table->timestamps();

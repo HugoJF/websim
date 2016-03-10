@@ -8,7 +8,8 @@ class QuestionVote extends Model
 {
     protected $table = 'question_votes';
 
-    public function question() {
+    public function question()
+    {
         return $this->belongsTo('App\Question');
     }
 }

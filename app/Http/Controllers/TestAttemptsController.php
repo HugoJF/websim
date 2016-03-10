@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
-use App\TestAttempt;
-use App\Test;
 use App\Question;
-
-use Illuminate\Http\Request;
+use App\Test;
+use App\TestAttempt;
 use Auth;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class TestAttemptsController extends Controller
 {
@@ -22,7 +18,7 @@ class TestAttemptsController extends Controller
 
         //return $testAttempts->first()->toJson();
         return view('attempts')->with([
-            'testAttempts' => $testAttempts->get()
+            'testAttempts' => $testAttempts->get(),
         ]);
     }
 
@@ -32,13 +28,13 @@ class TestAttemptsController extends Controller
 
         // Get the attempt with Test and Questions ORM Objects
         $attempt = TestAttempt::with('test')->where([
-            'id' => $attempt_id,
-            'user_id' => $user->id
+            'id'      => $attempt_id,
+            'user_id' => $user->id,
         ])->first();
 
         // Redirect to homepage if test is already completed
         if ($attempt->finished === true) {
-            return redirect('/result/' . $attempt_id);
+            return redirect('/result/'.$attempt_id);
         }
 
         // Test questions
@@ -58,14 +54,13 @@ class TestAttemptsController extends Controller
             });
         });
 
-
         //dd($remainingQuestions->count());
 
         // Debug remaining questions
-        \Debugbar::info('There are ' . $remainingQuestions->count() . ' questions remaining in this test attempt.');
+        \Debugbar::info('There are '.$remainingQuestions->count().' questions remaining in this test attempt.');
 
         // If there are no questions remaining, close the attempt and redirect to homepage
-        if($remainingQuestions->count() === 0) {
+        if ($remainingQuestions->count() === 0) {
             $attempt->finished = true;
             $attempt->save();
 
@@ -74,17 +69,15 @@ class TestAttemptsController extends Controller
 
         $questionIndex = $offsetAmount % ($remainingQuestions->count());
 
-        \Debugbar::info('Accessing question at index ' . $questionIndex . ' in remaining questions collection.');
-
+        \Debugbar::info('Accessing question at index '.$questionIndex.' in remaining questions collection.');
 
         // Get the question remaining in the test
         $question = $remainingQuestions[$remainingQuestions->keys()[$questionIndex]];
 
-
         return view('question')->with([
-            'attempt' => $attempt,
-            'question' => $question,
-            'skipQuestionPath' => 'attempts/continue/' . $attempt->id . '/' . ($questionIndex + 1)
+            'attempt'          => $attempt,
+            'question'         => $question,
+            'skipQuestionPath' => 'attempts/continue/'.$attempt->id.'/'.($questionIndex + 1),
         ]);
     }
 
@@ -94,9 +87,9 @@ class TestAttemptsController extends Controller
 
         // Get unfinished attempts for the test
         $attempts = TestAttempt::where([
-            'user_id' => $user->id,
-            'test_id' => $test_id,
-            'finished' => 0
+            'user_id'  => $user->id,
+            'test_id'  => $test_id,
+            'finished' => 0,
         ])->orderBy('created_at', 'desc');
 
         // Create new attempt if there are not attempts in DB
@@ -108,15 +101,16 @@ class TestAttemptsController extends Controller
             $attempt->finished = false;
 
             $attempt->save();
-        } else if ($attempts->get()->count() >= 2) {
+        } elseif ($attempts->get()->count() >= 2) {
             //Invalid amount of attempts
             return 'More than 1';
         }
 
-        return redirect('/attempts/continue/' . $attempts->first()->id);
+        return redirect('/attempts/continue/'.$attempts->first()->id);
     }
 
-    public function result($attempt_id = -1) {
+    public function result($attempt_id = -1)
+    {
         $attempt = Attempt::with('answers')->find($attempt_id);
     }
 }

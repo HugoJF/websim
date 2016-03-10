@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\QuestionVote;
-
 class Question extends Model
 {
     protected $table = 'questions';
@@ -12,7 +10,7 @@ class Question extends Model
     private $jsonInformation = null;
 
     /**
-     * Return tests related to this question
+     * Return tests related to this question.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -22,7 +20,7 @@ class Question extends Model
     }
 
     /**
-     * Return votes related to this question
+     * Return votes related to this question.
      *
      * @return mixed
      */
@@ -37,7 +35,7 @@ class Question extends Model
     }
 
     /**
-     * Return comments related to this question
+     * Return comments related to this question.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -52,7 +50,7 @@ class Question extends Model
     }
 
     /**
-     * Calculates the score based on votes
+     * Calculates the score based on votes.
      *
      * @return mixed
      */
@@ -76,7 +74,8 @@ class Question extends Model
         return $this->jsonInformation;
     }
 
-    public function getPossibleAnswers() {
+    public function getPossibleAnswers()
+    {
         return $this->getInformationAsJson()->possibleAnswers;
     }
 }

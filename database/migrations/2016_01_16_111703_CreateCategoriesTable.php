@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCategoriesTable extends Migration
 {
@@ -13,16 +13,16 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-			// AUTO
-			$table->increments('id');
-			$table->string('path', 255)->nullable();
-			$table->integer('parent_id')->unsigned()->nullable();
-			$table->integer('level')->default(0);
-			$table->timestamps();
-			$table->index(array('path', 'parent_id', 'level'));
-			$table->foreign('parent_id')->references('id')->on('categories')->onDelete('CASCADE');
-			}
-		);
+            // AUTO
+            $table->increments('id');
+            $table->string('path', 255)->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('level')->default(0);
+            $table->timestamps();
+            $table->index(['path', 'parent_id', 'level']);
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('CASCADE');
+            }
+        );
     }
 
     /**
