@@ -8,7 +8,8 @@ class CommentVotes extends Model
 {
     protected $table = 'comment_votes';
 
-    public function comment() {
+    public function comment()
+    {
         return $this->belongsTo('App\Comment');
     }
 }

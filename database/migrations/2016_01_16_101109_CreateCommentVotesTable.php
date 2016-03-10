@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCommentVotesTable extends Migration
 {
@@ -17,15 +17,15 @@ class CreateCommentVotesTable extends Migration
             $table->increments('id');
 
             // What user create the vote
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
 
             // What comment this vote belongs to
-			$table->integer('comment_id')->unsigned();
-			$table->foreign('comment_id')->references('id')->on('comments');
+            $table->integer('comment_id')->unsigned();
+            $table->foreign('comment_id')->references('id')->on('comments');
 
             // TRUE if positive, FALSE if negative
-			$table->boolean('direction');
+            $table->boolean('direction');
 
             // Timestamps
             $table->timestamps();
