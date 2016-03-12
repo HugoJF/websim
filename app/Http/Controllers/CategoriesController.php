@@ -9,14 +9,14 @@ class CategoriesController extends Controller
     public function index()
     {
         return view('categories_list')->with([
-            'categories' => Category::all()->toHierarchy()
+            'categories' => Category::all()->toHierarchy(),
         ]);
     }
 
     public function show($id = -1)
     {
         return view('categories_list')->with([
-            'categories' => Category::find($id)->getDescendantsAndSelf()->toHierarchy()
+            'categories' => Category::find($id)->getDescendantsAndSelf()->toHierarchy(),
         ]);
     }
 
