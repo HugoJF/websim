@@ -71,6 +71,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile/questions', 'ProfileController@questions');
     Route::get('/profile/tests', 'ProfileController@tests');
 
+    // Categories
+    Route::get('/categories/', 'CategoriesController@index'); // TODO
+    Route::get('/categories/json', 'CategoriesController@json');
+    Route::get('/categories/{category_id}', 'CategoriesController@show'); // TODO
+
     //DEBUGGING
     Route::get('/something', ['middleware' => 'check.admin', 'uses' => 'HomeController@something']);
 

@@ -14,4 +14,14 @@ class Category extends Node
     {
         return $this->belongsTo('App\User');
     }
+
+    public function getViewLink()
+    {
+        return url('/categories/' . $this->id);
+    }
+
+    public function getParentLink()
+    {
+        return url('/categories/' . $this->getParentId());
+    }
 }
