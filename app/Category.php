@@ -8,6 +8,8 @@ class Category extends Node
 {
     protected $table = 'categories';
 
+    protected $orderColumn = 'name';
+
     protected $guarded = ['id', 'parent_id', 'lidx', 'ridx', 'nesting'];
 
     public function user()

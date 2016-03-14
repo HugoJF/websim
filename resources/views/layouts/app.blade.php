@@ -48,6 +48,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/categories') }}">Category list</a></li>
                     <li><a href="{{ url('/test') }}">Test List</a></li>
                     <li><a href="{{ url('/questions') }}">Question list</a></li>
                 </ul>

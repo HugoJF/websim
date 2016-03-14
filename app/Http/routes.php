@@ -72,9 +72,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile/tests', 'ProfileController@tests');
 
     // Categories
-    Route::get('/categories/', 'CategoriesController@index'); // TODO
+    Route::get('/categories/', 'CategoriesController@index');
     Route::get('/categories/json', 'CategoriesController@json');
-    Route::get('/categories/{category_id}', 'CategoriesController@show'); // TODO
+    Route::get('/categories/add/{category_id}', 'CategoriesController@showAddForm');
+    Route::get('/categories/{category_id}', 'CategoriesController@show');
+
+    Route::post('/categories/add', 'CategoriesController@submit');
 
     //DEBUGGING
     Route::get('/something', ['middleware' => 'check.admin', 'uses' => 'HomeController@something']);
