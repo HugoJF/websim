@@ -77,6 +77,5 @@ class DatabaseSeeder extends Seeder
             $q->category()->associate(App\Category::all()->random());
             $q->save();
         });
-
     }
 }
