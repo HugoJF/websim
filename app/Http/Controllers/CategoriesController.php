@@ -30,22 +30,22 @@ class CategoriesController extends Controller
     {
         return view('add_category')->with([
             'category'           => Category::find($category_id),
-            'parent_category_id' => $category_id
+            'parent_category_id' => $category_id,
         ]);
     }
 
     public function submit(Request $request)
     {
         $this->validate($request, [
-            'category_name'  => 'required',
-            'parent_category'=> 'required',
+            'category_name'   => 'required',
+            'parent_category' => 'required',
         ]);
 
         \Debugbar::info(Input::all());
 
         $parentCategory = Category::find(Input::get('parent_category'));
 
-        if($parentCategory == null) {
+        if ($parentCategory == null) {
             return back();
         }
 
@@ -55,6 +55,5 @@ class CategoriesController extends Controller
         ]);
 
         return redirect($newCategory->getViewLink());
-
     }
 }
