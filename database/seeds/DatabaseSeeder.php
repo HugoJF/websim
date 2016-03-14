@@ -73,17 +73,10 @@ class DatabaseSeeder extends Seeder
             $c->save();
         });
 
-        /* factory(App\Category::class, 25)->make(['name' => '1'])->each(function (App\Category $c1) use($root) {
-             $c1->makeChildOf($root);
-             $c1->save();
-             factory(App\Category::class, 1)->make(['name' => 2])->each(function (App\Category $c2) use ($root, $c1) {
-                 $c2->makeChildOf($c1);
-                 $c2->save();
-                 factory(App\Category::class, 2)->make()->each(function (App\Category $c3) use ($c2) {
-                     $c3->makeChildOf($c2);
-                     $c3->save();
-                 });
-             });
-         });*/
+        App\Question::all()->each(function (App\Question $q) {
+            $q->category()->associate(App\Category::all()->random());
+            $q->save();
+        });
+
     }
 }

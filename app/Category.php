@@ -17,6 +17,11 @@ class Category extends Node
         return $this->belongsTo('App\User');
     }
 
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
+
     public function getViewLink()
     {
         return url('/categories/'.$this->id);

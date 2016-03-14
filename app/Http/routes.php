@@ -80,7 +80,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/categories/add', 'CategoriesController@submit');
 
     //DEBUGGING
-    Route::get('/something', ['middleware' => 'check.admin', 'uses' => 'HomeController@something']);
+    Route::get('/do', function () {
+        return \App\Question::find(1)->category()->associate(\App\Category::find(1));
+    });
 
     //Version
     Route::get('/debug', function () {
