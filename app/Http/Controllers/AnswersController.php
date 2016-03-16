@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Input;
 
 class AnswersController extends Controller
 {
+    public function index()
+    {
+        return view('answers_list')->with([
+            'answers' => Answer::where('user_id', Auth::user()->id)->get()
+        ]);
+    }
+
     public function submit(Request $request)
     {
         $this->validate($request, [

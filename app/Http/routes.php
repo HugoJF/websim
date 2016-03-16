@@ -50,11 +50,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/attempts/continue/{attempt_id}', 'TestAttemptsController@continueTest');
     Route::get('/attempts/continue/{attempt_id}/{question_index}', 'TestAttemptsController@continueTest');
     Route::get('/attempts/create/{test_id}', 'TestAttemptsController@createAttempt');
-    Route::get('/attempts/result/{attempt_id}', 'TestAttemptsController@result'); // TODO
+    Route::get('/attempts/result/{attempt_id}', 'TestAttemptsController@result');
 
     // Test
     Route::get('/test', 'TestController@listTests');
-    Route::get('/test/create', 'TestController@create'); // TODO
+    Route::get('/test/create', 'TestController@create'); // TODO - Hard
     Route::get('/test/{test_id}', 'TestController@index');
 
     // Answers
@@ -62,13 +62,13 @@ Route::group(['middleware' => 'web'], function () {
 
     // Questions
     Route::get('/questions', 'QuestionsController@listQuestions');
-    Route::get('/questions/submit', 'QuestionsController@submit'); // TODO
+    Route::get('/questions/submit', 'QuestionsController@submit'); // TODO - Medium
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
 
     // Profile
-    Route::get('/profile/attempts', 'TestAttemptsController@index'); // TODO
-    Route::get('/profile/answers', 'ProfileController@answers'); // TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
-    Route::get('/profile/questions', 'ProfileController@questions');
+    Route::get('/profile/attempts', 'TestAttemptsController@index');
+    Route::get('/profile/answers', 'AnswersController@index');
+    Route::get('/profile/questions', 'ProfileController@questions');// TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
     Route::get('/profile/tests', 'ProfileController@tests');
 
     // Categories

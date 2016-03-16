@@ -21,7 +21,7 @@
     </div>
     <div class="panel-footer">
         <a href="{{ url('test/' . $test->id) }}">
-            <p style="margin-bottom: 0px" class="text-center">Test made by: {{ $test->user->name }}</p>
+            <p style="margin-bottom: 0px" class="text-center">Test created by {{ $test->user->name }}</p>
         </a>
 
     </div>

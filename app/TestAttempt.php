@@ -37,4 +37,26 @@ class TestAttempt extends Model
     {
         return $this->test->getQuestionAmount() - $this->getAnsweredQuestions();
     }
+
+    public function getCorrectAnswersAmount()
+    {
+        $correctAnswers = 0;
+
+        foreach($this->answers as $answer) {
+            if($answer->isCorrect()) $correctAnswers++;
+        }
+
+        return $correctAnswers;
+    }
+
+    public function getIncorrectAnswersAmount()
+    {
+        $incorrectAnswers = 0;
+
+        foreach ($this->answers as $answer) {
+            if(!$answer->isCorrect()) $incorrectAnswers++;
+        }
+
+        return $incorrectAnswers;
+    }
 }

@@ -41,7 +41,7 @@
     </div>
     <div class="panel-footer">
         <a href="{{ url('questions/' . $question->id) }}">
-            <p style="margin-bottom: 0px" class="text-center">Test made by: {{ $question->user->name }}</p>
+            <p style="margin-bottom: 0px" class="text-center">Question made by {{ $question->user->name }}, scoring {{ $question->getScore() }} points</p>
         </a>
 
     </div>

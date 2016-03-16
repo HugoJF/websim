@@ -111,7 +111,7 @@ class TestAttemptsController extends Controller
 
     public function result($attempt_id = -1)
     {
-        $attempt = TestAttempt::with('answers', 'answers.question')->find($attempt_id);
+        $attempt = TestAttempt::with('answers', 'answers.question', 'answers.question.user')->find($attempt_id);
 
         return view('attempt_result')->with([
             'attempt' => $attempt
