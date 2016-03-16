@@ -21,4 +21,19 @@ class Answer extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function question()
+    {
+        return $this->belongsTo('App\Question');
+    }
+
+    public function test()
+    {
+        return $this->belongsTo('App\Test');
+    }
+
+    public function isCorrect()
+    {
+        return $this->question->isCorrect($this->answer);
+    }
 }

@@ -50,6 +50,11 @@ class Question extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function answers()
+    {
+        return $this->hasMany('App\Question');
+    }
+
     public function pivot()
     {
         return $this->hasOne('App\QuestionTest');
@@ -83,5 +88,10 @@ class Question extends Model
     public function getPossibleAnswers()
     {
         return $this->getInformationAsJson()->possibleAnswers;
+    }
+
+    public function isCorrect($index)
+    {
+        return $index == $this->getInformationAsJson()->correctAnswer;
     }
 }
