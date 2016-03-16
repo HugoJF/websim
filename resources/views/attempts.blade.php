@@ -13,7 +13,7 @@
                                 @if($attempt->finished == true)
                                     <li><a href="{{ $attempt->getResultURL() }}">Finished: {{$attempt->id}}</a></li>
                                 @else
-                                    <li>In-progress: {{$attempt->id}} - {{$attempt->last_answered_question + 1 }} | {{$attempt->test->questions()->get()->count()}} | {{ HTML::link('/attempts/continue/' . $attempt->id, 'Continue') }}</li>
+                                    <li>In-progress: {{$attempt->id}} - {{$attempt->getAnsweredQuestionsAmount()}} | {{$attempt->test->getQuestionAmount()}} | {{ HTML::link('/attempts/continue/' . $attempt->id, 'Continue') }}</li>
                                 @endif
                             @endforeach
                         </ul>

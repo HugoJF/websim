@@ -37,4 +37,9 @@ class Test extends Model
     {
         return $this->hasOne('App\QuestionTest');
     }
+
+    public function getQuestionAmount()
+    {
+        return $this->questions->count();
+    }
 }

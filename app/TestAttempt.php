@@ -27,4 +27,14 @@ class TestAttempt extends Model
     {
         return url('attempts/result/'.$this->id);
     }
+
+    public function getAnsweredQuestionsAmount()
+    {
+        return $this->answers->count();
+    }
+
+    public function getUnansweredQuestionsAmount()
+    {
+        return $this->test->getQuestionAmount() - $this->getAnsweredQuestions();
+    }
 }
