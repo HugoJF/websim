@@ -42,8 +42,10 @@ class TestAttempt extends Model
     {
         $correctAnswers = 0;
 
-        foreach($this->answers as $answer) {
-            if($answer->isCorrect()) $correctAnswers++;
+        foreach ($this->answers as $answer) {
+            if ($answer->isCorrect()) {
+                $correctAnswers++;
+            }
         }
 
         return $correctAnswers;
@@ -54,7 +56,9 @@ class TestAttempt extends Model
         $incorrectAnswers = 0;
 
         foreach ($this->answers as $answer) {
-            if(!$answer->isCorrect()) $incorrectAnswers++;
+            if (!$answer->isCorrect()) {
+                $incorrectAnswers++;
+            }
         }
 
         return $incorrectAnswers;

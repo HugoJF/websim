@@ -12,7 +12,7 @@ class AnswersController extends Controller
     public function index()
     {
         return view('answers_list')->with([
-            'answers' => Answer::where('user_id', Auth::user()->id)->get()
+            'answers' => Answer::where('user_id', Auth::user()->id)->get(),
         ]);
     }
 

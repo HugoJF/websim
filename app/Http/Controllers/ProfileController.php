@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Answer;
 use App\Question;
 use App\Test;
 use Auth;
