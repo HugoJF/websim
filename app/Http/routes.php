@@ -68,7 +68,7 @@ Route::group(['middleware' => 'web'], function () {
     // Profile
     Route::get('/profile/attempts', 'TestAttemptsController@index');
     Route::get('/profile/answers', 'AnswersController@index');
-    Route::get('/profile/questions', 'ProfileController@questions');// TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
+    Route::get('/profile/questions', 'ProfileController@questions'); // TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
     Route::get('/profile/tests', 'ProfileController@tests');
 
     // Categories
