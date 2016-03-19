@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use App\Question;
 
 class CategoriesController extends Controller
 {
@@ -16,14 +17,15 @@ class CategoriesController extends Controller
     public function show($id = -1)
     {
         return view('categories_list')->with([
-            'categories' => Category::find($id)->getDescendantsAndSelf()->toHierarchy(),
+            'categories' => Category::find($id)->descendantsAndSelf()->orderBy('name')->get()->toHierarchy(),
         ]);
     }
 
     public function json()
     {
         //return Category::all()->toHierarchy();
-        return Category::find(1)->getImmediateDescendants()->toHierarchy();
+        //dd(Category::find(229)->ancestors()->orderBy('categories.lft'));
+        return Category::find(229)->ancestors()->orderBy('categories.lft')->get();
     }
 
     public function showAddForm($category_id = -1)

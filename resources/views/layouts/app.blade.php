@@ -66,10 +66,11 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/profile/summary') }}"><i class="fa fa-btn fa-list"></i>Summary</a></li>
                                 <li><a href="{{ url('/profile/attempts') }}"><i class="fa fa-btn fa-tasks"></i>My Attempts</a></li>
                                 <li><a href="{{ url('/profile/answers') }}"><i class="fa fa-btn fa-check-square"></i>My Answers</a></li>
                                 <li><a href="{{ url('/profile/questions') }}"><i class="fa fa-btn fa-pencil"></i>My Questions</a></li>
-                                <li><a href="{{ url('/profile/tests') }}"><i class="fa fa-btn fa-list"></i>My Tests</a></li>
+                                <li><a href="{{ url('/profile/tests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

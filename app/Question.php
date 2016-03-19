@@ -52,7 +52,7 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany('App\Question');
+        return $this->hasMany('App\Answer');
     }
 
     public function pivot()
@@ -67,13 +67,58 @@ class Question extends Model
      */
     public function getScore()
     {
-        return $this->votes()->get()->reduce(function ($carry, $item) {
+        return $this->votes->reduce(function ($carry, $item) {
             if ($item->direction == 1) {
                 return $carry + 1;
             } else {
                 return $carry - 1;
             }
         });
+    }
+
+    public function getTotalAnswers()
+    {
+        $totalAnswers = 0;
+        foreach($this->answers as $answer) {
+            $totalAnswers++;
+        }
+
+        return $totalAnswers;
+    }
+
+    public function getTotalCorrectAnswers()
+    {
+        $totalCorrectAnswers = 0;
+        foreach($this->answers as $answer) {
+            if($this->isCorrect($answer->answer)) {
+                $totalCorrectAnswers++;
+            }
+        }
+
+        return $totalCorrectAnswers;
+    }
+
+    public function getCorrectAnswersPercentage()
+    {
+        $totalCorrectAnswers = $this->getTotalCorrectAnswers();
+        $totalAnswers = $this->getTotalAnswers();
+        if($totalAnswers != 0) {
+            return round($this->getTotalCorrectAnswers() / $this->getTotalAnswers() * 100);
+        } else {
+            return 0;
+        }
+    }
+
+    public function getTotalIncorrectAnswers()
+    {
+        $totalIncorrectAnswers = 0;
+        foreach($this->answers as $answer) {
+            if($this->isCorrect($answer->answer)) {
+                $totalIncorrectAnswers++;
+            }
+        }
+
+        return $totalIncorrectAnswers;
     }
 
     public function getInformationAsJson()

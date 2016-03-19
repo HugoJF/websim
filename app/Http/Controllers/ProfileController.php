@@ -8,6 +8,11 @@ use Auth;
 
 class ProfileController extends Controller
 {
+    public function summary()
+    {
+
+    }
+
     public function tests()
     {
         return Test::where('user_id', Auth::user()->id)->get();

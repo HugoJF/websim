@@ -1,7 +1,7 @@
 <div class="panel panel-default panel-primary">
 
     <div class="panel-heading">
-        <a class="panel-title">{{ $question->question_title }}</a>
+        <a href="{{ url('questions/' . $question->id) }}" class="panel-title">{{ $question->question_title }}</a>
     </div>
 
     {{ Form::open(['url' => 'answers/submit']) }}
@@ -17,8 +17,8 @@
 
                     <p>{{ $possibleAnswer }}</p>
                 </label>
-                <br>
 
+                <br>
             @endforeach
 
         </div>
@@ -42,6 +42,8 @@
     <div class="panel-footer">
         <a href="{{ url('questions/' . $question->id) }}">
             <p style="margin-bottom: 0px" class="text-center">Question made by {{ $question->user->name }}, scoring {{ $question->getScore() }} points</p>
+
+            <p style="margin-bottom: 0px" class="text-center">{{ $question->getCorrectAnswersPercentage() }}% correct answers out of {{ $question->getTotalAnswers() }} answers</p>
         </a>
 
     </div>

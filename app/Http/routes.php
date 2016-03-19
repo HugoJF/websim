@@ -11,10 +11,6 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -25,6 +21,7 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
 Route::group(['middleware' => 'web'], function () {
 
     // Authentication Routes...
@@ -61,11 +58,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('answers/submit', 'AnswersController@submit');
 
     // Questions
-    Route::get('/questions', 'QuestionsController@listQuestions');
+    Route::get('/questions', 'QuestionsController@listAllQuestions');
     Route::get('/questions/submit', 'QuestionsController@submit'); // TODO - Medium
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
 
     // Profile
+    Route::get('/profile/summary', 'ProfileController@summary'); // TODO
     Route::get('/profile/attempts', 'TestAttemptsController@index');
     Route::get('/profile/answers', 'AnswersController@index');
     Route::get('/profile/questions', 'ProfileController@questions'); // TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
@@ -76,8 +74,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/categories/json', 'CategoriesController@json');
     Route::get('/categories/add/{category_id}', 'CategoriesController@showAddForm');
     Route::get('/categories/{category_id}', 'CategoriesController@show');
+    Route::get('/categories/{category_id}/browse', 'QuestionsController@category');
 
     Route::post('/categories/add', 'CategoriesController@submit');
+
+
+
+
+
 
     //DEBUGGING
     Route::get('/do', function () {
@@ -88,5 +92,4 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/debug', function () {
         return phpinfo();
     });
-
 });

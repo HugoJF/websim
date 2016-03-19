@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Question;
 
 class QuestionsController extends Controller
 {
-    public function listQuestions()
+    public function listAllQuestions()
     {
         return view('question_list')->with([
-            'questions' => Question::with('user')->paginate(10),
+            'questions' => Question::with('user', 'votes', 'answers')->paginate(10),
         ]);
     }
 
@@ -17,6 +18,16 @@ class QuestionsController extends Controller
     {
         return view('question')->with([
             'question' => Question::find($id),
+        ]);
+    }
+
+    public function category($category_id = -1)
+    {
+        $categories = Category::find($category_id)->getDescendantsAndSelf()->pluck('id');
+
+        //return Question::with('user')->whereIn('category_id', $categories)->paginate(10);
+        return view('question_list')->with([
+            'questions' => Question::with('user')->whereIn('category_id', $categories)->paginate(10)
         ]);
     }
 }
