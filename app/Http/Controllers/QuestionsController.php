@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Question;
+use Illuminate\Support\Facades\Input;
 
 class QuestionsController extends Controller
 {
@@ -29,5 +30,16 @@ class QuestionsController extends Controller
         return view('question_list')->with([
             'questions' => Question::with('user')->whereIn('category_id', $categories)->paginate(10)
         ]);
+    }
+
+    public function search()
+    {
+        if(Input::has('query')) {
+            return view('question_list')->with([
+                'questions' => Question::where('question_title', 'LIKE', '%' . Input::get('query') . '%')->paginate(10)->appends(Input::except('page')),
+            ]);
+        } else {
+            return view('question_search_form');
+        }
     }
 }
