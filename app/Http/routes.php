@@ -78,11 +78,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/categories/add', 'CategoriesController@submit');
 
-
-
-
-
-
     //DEBUGGING
     Route::get('/do', function () {
         return \App\Question::find(1)->category()->associate(\App\Category::find(1));
