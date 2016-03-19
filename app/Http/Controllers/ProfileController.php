@@ -10,7 +10,6 @@ class ProfileController extends Controller
 {
     public function summary()
     {
-
     }
 
     public function tests()

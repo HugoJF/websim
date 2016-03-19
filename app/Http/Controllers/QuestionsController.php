@@ -28,7 +28,7 @@ class QuestionsController extends Controller
 
         //return Question::with('user')->whereIn('category_id', $categories)->paginate(10);
         return view('question_list')->with([
-            'questions' => Question::with('user')->whereIn('category_id', $categories)->paginate(10)
+            'questions' => Question::with('user')->whereIn('category_id', $categories)->paginate(10),
         ]);
     }
 
