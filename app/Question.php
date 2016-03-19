@@ -79,7 +79,7 @@ class Question extends Model
     public function getTotalAnswers()
     {
         $totalAnswers = 0;
-        foreach($this->answers as $answer) {
+        foreach ($this->answers as $answer) {
             $totalAnswers++;
         }
 
@@ -89,8 +89,8 @@ class Question extends Model
     public function getTotalCorrectAnswers()
     {
         $totalCorrectAnswers = 0;
-        foreach($this->answers as $answer) {
-            if($this->isCorrect($answer->answer)) {
+        foreach ($this->answers as $answer) {
+            if ($this->isCorrect($answer->answer)) {
                 $totalCorrectAnswers++;
             }
         }
@@ -102,7 +102,7 @@ class Question extends Model
     {
         $totalCorrectAnswers = $this->getTotalCorrectAnswers();
         $totalAnswers = $this->getTotalAnswers();
-        if($totalAnswers != 0) {
+        if ($totalAnswers != 0) {
             return round($this->getTotalCorrectAnswers() / $this->getTotalAnswers() * 100);
         } else {
             return 0;
@@ -112,8 +112,8 @@ class Question extends Model
     public function getTotalIncorrectAnswers()
     {
         $totalIncorrectAnswers = 0;
-        foreach($this->answers as $answer) {
-            if($this->isCorrect($answer->answer)) {
+        foreach ($this->answers as $answer) {
+            if ($this->isCorrect($answer->answer)) {
                 $totalIncorrectAnswers++;
             }
         }
