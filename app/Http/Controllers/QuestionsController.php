@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Question;
 use App\QuestionVote;
-use Illuminate\Support\Facades\Input;
 use Auth;
+use Illuminate\Support\Facades\Input;
 
 class QuestionsController extends Controller
 {
@@ -24,7 +24,7 @@ class QuestionsController extends Controller
             'user_id'     => Auth::user()->id,
         ]);
 
-        if($vote->count() == 0) {
+        if ($vote->count() == 0) {
             $vote = null;
         } else {
             $vote = (bool) $vote->first()->direction;
@@ -32,7 +32,7 @@ class QuestionsController extends Controller
 
         return view('question')->with([
             'question' => Question::find($id),
-            'vote' => $vote,
+            'vote'     => $vote,
         ]);
     }
 

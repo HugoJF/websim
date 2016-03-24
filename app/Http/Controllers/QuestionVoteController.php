@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CommentVotes;
 use App\QuestionVote;
-use Illuminate\Http\Request;
 use Auth;
-
-use App\Http\Requests;
 
 class QuestionVoteController extends Controller
 {
@@ -30,7 +26,7 @@ class QuestionVoteController extends Controller
         ]);
 
         // If there is no vote for this question, create one
-        if($vote->count() == 0) {
+        if ($vote->count() == 0) {
             $vote = new QuestionVote();
 
             $vote->user_id = Auth::user()->id;
@@ -40,7 +36,7 @@ class QuestionVoteController extends Controller
         }
 
         // If the user is trying to send the same vote, delete the vote
-        if($vote->direction == $voteVal) {
+        if ($vote->direction == $voteVal) {
             $vote->delete();
         } else {
             // Change de direction of the vote
