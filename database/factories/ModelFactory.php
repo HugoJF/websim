@@ -33,7 +33,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
  */
 $factory->define(App\Test::class, function (Faker\Generator $faker) {
     $created_at = $faker->dateTimeThisMonth()->format('Y-m-d H:i:s');
-    $unlisted   =  $faker->boolean(10);
+    $unlisted = $faker->boolean(10);
 
     //Check if we need to create users
     if (App\User::all()->count() == 0) {

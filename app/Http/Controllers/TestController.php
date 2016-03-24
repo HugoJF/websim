@@ -10,7 +10,7 @@ class TestController extends Controller
     {
         $test = Test::with('user', 'questions')->find($id);
 
-        if($test->unlisted) {
+        if ($test->unlisted) {
             return 'Unlisted test, you should access it via the share link';
         }
 

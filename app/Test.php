@@ -40,7 +40,7 @@ class Test extends Model
 
     public function getViewLink()
     {
-        if($this->unlisted){
+        if ($this->unlisted) {
             return url('/test/'.$this->stub);
         } else {
             return url('/test/'.$this->id);
