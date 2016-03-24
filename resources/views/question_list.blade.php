@@ -6,11 +6,13 @@
             <div class="col-md-12">
                 <h1>Questions</h1>
                 <br>
-                @foreach($questions as $question)
+                @forelse($questions as $question)
                     @include('partials.question', array(
                         'question' => $question
                     ))
-                @endforeach
+                @empty
+                    <h2>No questions found for "{{ $query }}"</h2>
+                @endforelse
             </div>
 
             <div class="text-center">

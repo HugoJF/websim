@@ -37,6 +37,7 @@ class QuestionsController extends Controller
         if(Input::has('query')) {
             return view('question_list')->with([
                 'questions' => Question::where('question_title', 'LIKE', '%' . Input::get('query') . '%')->paginate(10)->appends(Input::except('page')),
+                'query'     => Input::get('query'),
             ]);
         } else {
             return view('question_search_form');
