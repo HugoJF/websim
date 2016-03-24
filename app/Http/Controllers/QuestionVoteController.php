@@ -36,7 +36,8 @@ class QuestionVoteController extends Controller
         }
 
         // If the user is trying to send the same vote, delete the vote
-        if ($vote->direction == $voteVal) {
+
+        if ($vote->direction !== null && $vote->direction == $voteVal) {
             $vote->delete();
         } else {
             // Change de direction of the vote
