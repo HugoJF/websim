@@ -38,6 +38,15 @@ class Test extends Model
         return $this->hasOne('App\QuestionTest');
     }
 
+    public function getViewLink()
+    {
+        if($this->unlisted){
+            return url('/test/'.$this->stub);
+        } else {
+            return url('/test/'.$this->id);
+        }
+    }
+
     public function getQuestionAmount()
     {
         return $this->questions->count();

@@ -33,6 +33,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
  */
 $factory->define(App\Test::class, function (Faker\Generator $faker) {
     $created_at = $faker->dateTimeThisMonth()->format('Y-m-d H:i:s');
+    $unlisted   =  $faker->boolean(10);
 
     //Check if we need to create users
     if (App\User::all()->count() == 0) {
@@ -45,6 +46,8 @@ $factory->define(App\Test::class, function (Faker\Generator $faker) {
         'user_id'    => App\User::all()->random()->id,
         'created_at' => $created_at,
         'updated_at' => $created_at,
+        'unlisted'   => $unlisted,
+        'stub'       => $unlisted ? $faker->regexify('^[a-zA-Z]{25}$') : null,
     ];
 });
 

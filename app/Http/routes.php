@@ -52,6 +52,7 @@ Route::group(['middleware' => 'web'], function () {
     // Test
     Route::get('/test', 'TestController@listTests');
     Route::get('/test/create', 'TestController@create'); // TODO - Hard
+    Route::get('/test/{stub}', 'TestController@stub')->where('stub', '[A-Za-z]+');
     Route::get('/test/{test_id}', 'TestController@index');
 
     // Answers

@@ -23,6 +23,12 @@ class CreateTestsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
+            // If the test is unlisted
+            $table->boolean('unlisted');
+
+            // Random characters that point to this question
+            $table->string('stub', 10)->nullable();
+
             // Timestamps
             $table->timestamps();
         });

@@ -22,6 +22,12 @@
     <div class="panel-footer">
         <a href="{{ url('test/' . $test->id) }}">
             <p style="margin-bottom: 0px" class="text-center">Test created by {{ $test->user->name }}</p>
+            @if($test->unlisted)
+                <p style="margin-bottom: 0px" class="text-center">This test is unlisted.</p>
+                <p style="margin-bottom: 0px" class="text-center">
+                    <a href="{{ $test->getViewLink() }}">Share link: <strong>{{ $test->getViewLink() }}</strong></a>
+                </p>
+            @endif
         </a>
 
     </div>
