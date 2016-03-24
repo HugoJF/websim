@@ -32,12 +32,14 @@ class Answer extends Model
         return $this->belongsTo('App\Test');
     }
 
-    public function setAttemptIdAttribute($value){
-        $this->attributes['attempt_id'] = $value == "null" ? null : $value;
+    public function setAttemptIdAttribute($value)
+    {
+        $this->attributes['attempt_id'] = $value == 'null' ? null : $value;
     }
 
-    public function setTestIdAttribute($value){
-        $this->attributes['test_id'] = $value == "null" ? null : $value;
+    public function setTestIdAttribute($value)
+    {
+        $this->attributes['test_id'] = $value == 'null' ? null : $value;
     }
 
     public function isCorrect()
