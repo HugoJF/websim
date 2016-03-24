@@ -64,6 +64,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/search/', 'QuestionsController@search');
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
 
+    // Question votes
+    Route::post('/questionvote/up/{question_id}', 'QuestionVoteController@voteUp');
+    Route::post('/questionvote/down/{question_id}', 'QuestionVoteController@voteDown');
+
     // Profile
     Route::get('/profile/summary', 'ProfileController@summary'); // TODO
     Route::get('/profile/attempts', 'TestAttemptsController@index');

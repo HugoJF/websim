@@ -64,7 +64,7 @@ class TestAttemptsController extends Controller
             $attempt->finished = true;
             $attempt->save();
 
-            return redirect('/profile/attempts');
+            return redirect('/attempts/result/'.$attempt->id);
         }
 
         $questionIndex = $offsetAmount % ($remainingQuestions->count());

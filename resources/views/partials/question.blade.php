@@ -1,7 +1,23 @@
 <div class="panel panel-default panel-primary">
 
-    <div class="panel-heading">
+    <div class="clearfix panel-heading">
         <a href="{{ url('questions/' . $question->id) }}" class="panel-title">{{ $question->question_title }}</a>
+        <div class="pull-right" id="rating">
+
+            {{ Form::open(['url' => $question->getVoteUpLink(), 'style' => 'display: inline']) }}
+            <button type="submit" class="btn btn-link">
+                <i style="color:{{ isset($vote) && $vote === true ? 'lime' : 'white' }}" class="fa fa-2x fa-thumbs-up"></i>
+            </button>
+            {{ Form::close() }}
+
+
+            {{ Form::open(['url' => $question->getVoteDownLink(), 'style' => 'display: inline']) }}
+            <button type="submit" class="btn btn-link">
+                <i style="color:{{ isset($vote) && $vote === false ? 'red' : 'white' }}" class="fa fa-2x fa-thumbs-down"></i>
+            </button>
+            {{ Form::close() }}
+
+        </div>
     </div>
 
     {{ Form::open(['url' => 'answers/submit']) }}

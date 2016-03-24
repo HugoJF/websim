@@ -76,6 +76,16 @@ class Question extends Model
         });
     }
 
+    public function getVoteUpLink()
+    {
+        return url('/questionvote/up/'.$this->id);
+    }
+
+    public function getVoteDownLink()
+    {
+        return url('/questionvote/down/'.$this->id);
+    }
+
     public function getTotalAnswers()
     {
         $totalAnswers = 0;
