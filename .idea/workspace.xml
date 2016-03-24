@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f894393c-5bf6-47b6-aa28-56e9fc94ccd4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/question_list.blade.php" afterPath="$PROJECT_DIR$/resources/views/question_list.blade.php" />
     </list>
     <ignored path="websim.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,8 +98,8 @@
       <file leaf-file-name="QuestionsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7113734">
-              <caret line="39" column="51" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.69313306">
+              <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
               <folding>
                 <element signature="e#40#57#0#PHP" expanded="true" />
               </folding>
@@ -1036,8 +1034,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7113734">
-          <caret line="39" column="51" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.69313306">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
           <folding>
             <element signature="e#40#57#0#PHP" expanded="true" />
           </folding>
