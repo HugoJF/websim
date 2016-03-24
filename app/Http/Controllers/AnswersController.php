@@ -38,6 +38,10 @@ class AnswersController extends Controller
 
         $answer->save();
 
-        return redirect('/attempts/continue/'.Input::get('attempt_id', '-1'));
+        if($answer->test_id == null) {
+            return redirect('/questions/'.$answer->question_id);
+        } else {
+            return redirect('/attempts/continue/' . $answer->attempt_id);
+        }
     }
 }

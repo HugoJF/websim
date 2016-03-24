@@ -32,7 +32,7 @@ class CreateAnswersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             // What test we belong
-            $table->integer('test_id')->unsigned();
+            $table->integer('test_id')->unsigned()->nullable();
             $table->foreign('test_id')->references('id')->on('tests');
 
             // An attempt shouldn't have duplicate answers for the same question

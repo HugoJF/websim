@@ -25,9 +25,9 @@
 
         {{ Form::hidden('question_id', $question->id) }}
 
-        {{ Form::hidden('attempt_id', isset($attempt) ? $attempt->id : '') }}
+        {{ Form::hidden('attempt_id', isset($attempt) ? $attempt->id : 'null') }}
 
-        {{ Form::hidden('test_id', isset($attempt) ? $attempt->test->id : '') }}
+        {{ Form::hidden('test_id', isset($attempt) ? $attempt->test->id : 'null') }}
 
         {{ Form::hidden('user_id', Auth::user()->id) }}
 
