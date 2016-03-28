@@ -13,7 +13,7 @@ class QuestionsController extends Controller
     public function listAllQuestions()
     {
         return view('question_list')->with([
-            'questions' => Question::with(['user', 'votes' => function($query) { $query->where('user_id', Auth::user()->id); }, 'answers'])->paginate(10),
+            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'answers'])->paginate(10),
         ]);
     }
 

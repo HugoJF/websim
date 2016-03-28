@@ -61,7 +61,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/tests/add_question/{question_id}', 'TestController@showAddQuestionForm');
     Route::post('/tests/add_question/{question_id}', 'TestController@addQuestion');
 
-
     // Answers
     Route::post('answers/submit', 'AnswersController@submit');
 

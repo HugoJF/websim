@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
@@ -117,11 +117,10 @@ class Question extends Model
     public function getUserVote($id)
     {
         foreach ($this->votes as $vote) {
-            if($vote->user->id == $id) {
+            if ($vote->user->id == $id) {
                 return $vote;
             }
         }
-        return null;
     }
 
     public function getCorrectAnswersPercentage()
