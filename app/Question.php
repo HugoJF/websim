@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Question extends Model
 {
@@ -106,6 +107,21 @@ class Question extends Model
         }
 
         return $totalCorrectAnswers;
+    }
+
+    public function getCurrentUserVote()
+    {
+        return $this->getUserVote(Auth::user()->id);
+    }
+
+    public function getUserVote($id)
+    {
+        foreach ($this->votes as $vote) {
+            if($vote->user->id == $id) {
+                return $vote;
+            }
+        }
+        return null;
     }
 
     public function getCorrectAnswersPercentage()

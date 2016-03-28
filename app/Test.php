@@ -8,6 +8,8 @@ class Test extends Model
 {
     protected $table = 'tests';
 
+    protected $fillable = ['name'];
+
     /**
      * Returns questions related to this test.
      *

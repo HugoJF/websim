@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Test;
+use Illuminate\Support\Facades\Input;
+use Auth;
+use App\Question;
+use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
@@ -35,5 +39,51 @@ class TestController extends Controller
         return view('test_list')->with([
             'tests' => Test::where('unlisted', false)->with('questions', 'questions.user', 'user')->paginate(10),
         ]);
+    }
+
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'test_name'   => 'required',
+        ]);
+
+        \Debugbar::info(Input::all());
+
+        $test = new Test;
+
+        $test->name = Input::get('test_name');
+        $test->user()->associate(Auth::user());
+
+        $test->save();
+
+        return redirect('/test/'.$test->id);
+    }
+
+    public function showCreateForm()
+    {
+        return view('add_test');
+    }
+
+
+    public function showAddQuestionForm()
+    {
+        return view('add_question_to_test')->with([
+            'tests' => Auth::user()->tests()->get()
+        ]);
+    }
+
+    public function addQuestion($questionId, Request $request)
+    {
+        $this->validate($request, [
+            'test_id' => 'required',
+        ]);
+
+        $question = Question::find($questionId);
+
+        $test = Test::find(Input::get('test_id'));
+
+        $test->questions()->save($question);
+
+        return redirect('test/'.$test->id);
     }
 }

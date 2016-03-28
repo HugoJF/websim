@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\QuestionVote;
 use Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class QuestionVoteController extends Controller
 {
-    public function voteUp($questionId)
-    {
-        return $this->vote($questionId, true);
-    }
 
-    public function voteDown($questionId)
+    public function vote(Request $request)
     {
-        return $this->vote($questionId, false);
-    }
+        $this->validate($request, [
+            'question_id' => 'required',
+            'direction'   => 'required',
+        ]);
 
-    private function vote($questionId, $voteVal)
-    {
+
+        $questionId = Input::get('question_id');
+        $direction = Input::get('direction') == 'true' ? true : false;
+
+
         // Tries to find a vote for the same question
         $vote = QuestionVote::where([
             'question_id' => $questionId,
@@ -37,11 +40,11 @@ class QuestionVoteController extends Controller
 
         // If the user is trying to send the same vote, delete the vote
 
-        if ($vote->direction !== null && $vote->direction == $voteVal) {
+        if ($vote->direction !== null && $vote->direction == $direction) {
             $vote->delete();
         } else {
             // Change de direction of the vote
-            $vote->direction = $voteVal;
+            $vote->direction = $direction;
 
             // Persist the vote
             $vote->save();

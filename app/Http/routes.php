@@ -51,9 +51,16 @@ Route::group(['middleware' => 'web'], function () {
 
     // Test
     Route::get('/test', 'TestController@listTests');
-    Route::get('/test/create', 'TestController@create'); // TODO - Hard
+    Route::get('/test/create', 'TestController@showCreateForm'); // TODO - Hard
     Route::get('/test/{stub}', 'TestController@stub')->where('stub', '[A-Za-z]+');
     Route::get('/test/{test_id}', 'TestController@index');
+
+    Route::post('/test/create', 'TestController@create');
+
+    // Tests
+    Route::get('/tests/add_question/{question_id}', 'TestController@showAddQuestionForm');
+    Route::post('/tests/add_question/{question_id}', 'TestController@addQuestion');
+
 
     // Answers
     Route::post('answers/submit', 'AnswersController@submit');
@@ -65,8 +72,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
 
     // Question votes
-    Route::post('/questionvote/up/{question_id}', 'QuestionVoteController@voteUp');
-    Route::post('/questionvote/down/{question_id}', 'QuestionVoteController@voteDown');
+    Route::post('/question_vote/', 'QuestionVoteController@vote');
 
     // Profile
     Route::get('/profile/summary', 'ProfileController@summary'); // TODO
