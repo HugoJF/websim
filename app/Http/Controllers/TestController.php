@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Test;
-use Illuminate\Support\Facades\Input;
-use Auth;
 use App\Question;
+use App\Test;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class TestController extends Controller
 {
@@ -49,7 +49,7 @@ class TestController extends Controller
 
         \Debugbar::info(Input::all());
 
-        $test = new Test;
+        $test = new Test();
 
         $test->name = Input::get('test_name');
         $test->user()->associate(Auth::user());
@@ -64,11 +64,10 @@ class TestController extends Controller
         return view('add_test');
     }
 
-
     public function showAddQuestionForm()
     {
         return view('add_question_to_test')->with([
-            'tests' => Auth::user()->tests()->get()
+            'tests' => Auth::user()->tests()->get(),
         ]);
     }
 

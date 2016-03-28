@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\QuestionVote;
 use Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class QuestionVoteController extends Controller
 {
-
     public function vote(Request $request)
     {
         $this->validate($request, [
@@ -17,10 +16,8 @@ class QuestionVoteController extends Controller
             'direction'   => 'required',
         ]);
 
-
         $questionId = Input::get('question_id');
         $direction = Input::get('direction') == 'true' ? true : false;
-
 
         // Tries to find a vote for the same question
         $vote = QuestionVote::where([
