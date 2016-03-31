@@ -49,9 +49,10 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/categories') }}">Category list</a></li>
-                    <li><a href="{{ url('/test') }}">Test List</a></li>
+                    <li><a href="{{ url('/test') }}">Tests</a></li>
                     <li><a href="{{ url('/test/create') }}">Create test</a></li>
-                    <li><a href="{{ url('/questions') }}">Question list</a></li>
+                    <li><a href="{{ url('/questions') }}">Questions</a></li>
+                    <li><a href="{{ url('/questions/submit') }}">Create question</a></li>
                     <li><a href="{{ url('/questions/search') }}">Question search</a></li>
                 </ul>
 

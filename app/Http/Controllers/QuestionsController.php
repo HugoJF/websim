@@ -7,6 +7,7 @@ use App\Question;
 use App\QuestionVote;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
@@ -57,5 +58,36 @@ class QuestionsController extends Controller
         } else {
             return view('question_search_form');
         }
+    }
+
+    public function showSubmitForm()
+    {
+        return view('submit_question');
+    }
+
+    public function submit(Request $request)
+    {
+        $this->validate($request, [
+            'question_title'          => 'required|min:5',
+            'question_alternatives'   => 'required|array',
+            'question_alternatives.*' => 'required',
+            'correct_alternative'     => 'required|numeric',
+        ]);
+
+        $question = new Question();
+
+        $question->user()->associate(Auth::user()->id);
+
+        $question->question_title = Input::get('question_title');
+
+        foreach (Input::get('question_alternatives') as $alternative) {
+            $question->addAlternative($alternative);
+        }
+
+        $question->setCorrectAlternative(Input::get('correct_alternative'));
+
+        $question->save();
+
+        return redirect($question->getViewLink());
     }
 }

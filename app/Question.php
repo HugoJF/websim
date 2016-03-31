@@ -87,6 +87,11 @@ class Question extends Model
         return url('/questionvote/down/'.$this->id);
     }
 
+    public function getViewLink()
+    {
+        return url('/questions/'.$this->id);
+    }
+
     public function getTotalAnswers()
     {
         $totalAnswers = 0;
@@ -163,5 +168,23 @@ class Question extends Model
     public function isCorrect($index)
     {
         return $index == $this->getInformationAsJson()->correctAnswer;
+    }
+
+    public function addAlternative($alternative)
+    {
+        $this->getInformationAsJson();
+
+        $this->jsonInformation->possibleAnswers[] = $alternative;
+
+        $this->information = json_encode($this->jsonInformation);
+    }
+
+    public function setCorrectAlternative($correctAlternative)
+    {
+        $this->getInformationAsJson();
+
+        $this->jsonInformation->correctAnswer = $correctAlternative;
+
+        $this->information = json_encode($this->jsonInformation);
     }
 }

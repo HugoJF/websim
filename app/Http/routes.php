@@ -66,9 +66,11 @@ Route::group(['middleware' => 'web'], function () {
 
     // Questions
     Route::get('/questions', 'QuestionsController@listAllQuestions');
-    Route::get('/questions/submit', 'QuestionsController@submit'); // TODO - Medium
+    Route::get('/questions/submit', 'QuestionsController@showSubmitForm');
     Route::get('/questions/search/', 'QuestionsController@search');
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
+
+    Route::post('/questions/submit', 'QuestionsController@submit');
 
     // Question votes
     Route::post('/question_vote/', 'QuestionVoteController@vote');
