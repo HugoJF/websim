@@ -72,9 +72,8 @@ class QuestionsController extends Controller
         }
 
         return view('submit_question')->with([
-            'categories' => $select
+            'categories' => $select,
         ]);
-
     }
 
     public function submit(Request $request)
