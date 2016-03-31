@@ -68,8 +68,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions', 'QuestionsController@listAllQuestions');
     Route::get('/questions/submit', 'QuestionsController@showSubmitForm');
     Route::get('/questions/search/', 'QuestionsController@search');
+    Route::get('/questions/flag/{question_id}', 'QuestionsController@showFlagForm');
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
 
+    Route::post('/questions/flag', 'QuestionsController@flag');
     Route::post('/questions/submit', 'QuestionsController@submit');
 
     // Question votes

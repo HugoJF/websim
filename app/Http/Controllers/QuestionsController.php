@@ -6,6 +6,7 @@ use App\Category;
 use App\Question;
 use App\QuestionVote;
 use Auth;
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -89,5 +90,15 @@ class QuestionsController extends Controller
         $question->save();
 
         return redirect($question->getViewLink());
+    }
+
+    public function showFlagForm()
+    {
+        return Config::get('enums.question_flags');
+    }
+
+    public function flag(Request $request)
+    {
+        return 'Flagging';
     }
 }

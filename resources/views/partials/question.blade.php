@@ -27,6 +27,10 @@
                 <i style="color:white;" class="fa fa-2x fa-plus"></i>
             </a>
 
+            <a href="{{ url('/questions/flag/'.$question->id) }}" type="submit" class="btn btn-link">
+                <i style="color:white;" class="fa fa-2x fa-flag"></i>
+            </a>
+
         </div>
     </div>
 

@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-12">
                 @if($categories[$categories->keys()[0]]->getParentId() != null)
-                    <p>
+                    <ol class="breadcrumb">
                         @foreach($categories[$categories->keys()[0]]->getAncestors() as $ancestor)
-                            <a href="{{ $ancestor->getViewLink() }}">{{ $ancestor->name }}</a><strong> / </strong>
+                            <li><a href="{{ $ancestor->getViewLink() }}">{{ $ancestor->name }}</a></li>
                         @endforeach
-                    </p>
+                    </ol>
                 @endif
                 <h2>{{ $categories[$categories->keys()[0]]->name }}</h2>
                 <p><a href="/categories/add/{{ $categories[$categories->keys()[0]]->id }}">Add a new category to {{ $categories[$categories->keys()[0]]->name }}</a></p>
