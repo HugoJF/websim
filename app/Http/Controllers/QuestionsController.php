@@ -6,8 +6,8 @@ use App\Category;
 use App\Question;
 use App\QuestionVote;
 use Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class QuestionsController extends Controller
 {
