@@ -6,5 +6,5 @@ return [
         'BAD_CATEGORY',
         'BAD_TAGS',
         'BAD_ALTERNATIVES',
-    ]
+    ],
 ];
