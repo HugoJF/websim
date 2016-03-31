@@ -28,8 +28,9 @@
                     {{ Form::text('question_alternatives[4]', null, ['class' => 'form-control']) }}
                 </div>
 
+                <h2>Correct Alternative</h2>
+
                 <div class="form-group">
-                    {{ Form::label('Correct alternative') }}
                     {{ Form::select('correct_alternative', [
                         0 => 'Alternative 1',
                         1 => 'Alternative 2',
@@ -37,6 +38,12 @@
                         3 => 'Alternative 4',
                         4 => 'Alternative 5',
                     ], null, ['class' => 'form-control']) }}
+                </div>
+
+                <h2>Category</h2>
+
+                <div class="form-group">
+                    {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
                 </div>
 
                 {{ Form::submit('Submit question', array('class' => 'btn btn-block btn-primary')) }}

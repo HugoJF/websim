@@ -63,7 +63,18 @@ class QuestionsController extends Controller
 
     public function showSubmitForm()
     {
-        return view('submit_question');
+        $categories = Category::all();
+
+        $select = [];
+
+        foreach ($categories as $category) {
+            $select[$category->id] = str_repeat('― ', $category->depth).$category->name;
+        }
+
+        return view('submit_question')->with([
+            'categories' => $select
+        ]);
+
     }
 
     public function submit(Request $request)
@@ -73,6 +84,7 @@ class QuestionsController extends Controller
             'question_alternatives'   => 'required|array',
             'question_alternatives.*' => 'required',
             'correct_alternative'     => 'required|numeric',
+            'category_id'             => 'required',
         ]);
 
         $question = new Question();
