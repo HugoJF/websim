@@ -70,6 +70,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/search/', 'QuestionsController@search');
     Route::get('/questions/flag/{question_id}', 'QuestionsController@showFlagForm');
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
+    Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments');
 
     Route::post('/questions/flag', 'QuestionsController@flag');
     Route::post('/questions/submit', 'QuestionsController@submit');
@@ -81,8 +82,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile/summary', 'ProfileController@summary'); // TODO
     Route::get('/profile/attempts', 'TestAttemptsController@index');
     Route::get('/profile/answers', 'AnswersController@index');
-    Route::get('/profile/questions', 'ProfileController@questions'); // TODO Fix: point to correct controller, ProfileController shouldn't handle Answers/Questions/Test
-    Route::get('/profile/tests', 'ProfileController@tests');
+    Route::get('/profile/questions', 'QuestionsController@myQuestions');
+    Route::get('/profile/tests', 'TestController@myTests');
 
     // Categories
     Route::get('/categories/', 'CategoriesController@index');

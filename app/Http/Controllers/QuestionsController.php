@@ -32,10 +32,18 @@ class QuestionsController extends Controller
             $vote = (bool) $vote->first()->direction;
         }
 
+        $question = Question::with('votes', 'votes.user', 'user', 'comments', 'comments.user')->find($id);
+
         return view('question')->with([
-            'question' => Question::find($id),
+            'question' => $question,
             'vote'     => $vote,
         ]);
+    }
+
+    public function viewQuestionComments($question_id = -1)
+    {
+        return Question::find($question_id)->comments()->with('votes', 'user')->get();
+        //return Question::find(1)->votes()->get();
     }
 
     public function category($category_id = -1)
@@ -111,5 +119,12 @@ class QuestionsController extends Controller
     public function flag(Request $request)
     {
         return 'Flagging';
+    }
+
+    public function myQuestions()
+    {
+        return view('question_list')->with([
+            'questions' => Auth::user()->questions()->paginate(10)
+        ]);
     }
 }

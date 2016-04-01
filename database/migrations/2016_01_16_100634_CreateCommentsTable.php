@@ -20,9 +20,9 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            // What question this comment this belongs to
-            $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            // What thing this comment this belongs to
+            $table->integer('owner_id')->unsigned();
+            $table->string('owner_type');
 
             // The comment itself
             $table->text('comment');

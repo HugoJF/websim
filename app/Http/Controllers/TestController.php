@@ -41,6 +41,13 @@ class TestController extends Controller
         ]);
     }
 
+    public function myTests()
+    {
+        return view('test_list')->with([
+            'tests' => Auth::user()->tests()->paginate(10)
+        ]);
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [

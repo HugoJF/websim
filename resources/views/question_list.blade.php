@@ -11,7 +11,11 @@
                         'question' => $question
                     ))
                 @empty
-                    <h2>No questions found for "{{ $query }}"</h2>
+                    @if(isset($query))
+                        <h2>No questions found for "{{ $query }}"</h2>
+                    @else
+                        <h2>You haven't created any questions yet</h2>
+                    @endif
                 @endforelse
             </div>
 

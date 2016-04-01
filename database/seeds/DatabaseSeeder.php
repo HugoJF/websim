@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
             $u->questions()->saveMany(factory(App\Question::class, 5)->create()->each(function (App\Question $q) use ($u) {
                 $q->comments()->saveMany(factory(App\Comment::class, 5)->create([
                     'user_id'     => $u->id,
-                    'question_id' => $q->id,
                 ])->each(function (App\Comment $c) use ($u, $q) {
                     $c->votes()->saveMany(factory(App\CommentVotes::class, 5)->create([
                         'user_id'    => $u->id,
@@ -30,6 +29,10 @@ class DatabaseSeeder extends Seeder
             }));
 
             $u->tests()->saveMany(factory(App\Test::class, 5)->create()->each(function (App\Test $t) use ($u) {
+                $t->comments()->saveMany(factory(App\Comment::class, 5)->create([
+                    'user_id' => $u->id,
+                ]));
+
                 App\Question::all()->random(5)->each(function ($q) use ($u, $t) {
                     $t->questions()->attach($q);
                 });

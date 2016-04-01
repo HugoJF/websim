@@ -13,14 +13,9 @@ class Comment extends Model
      */
     protected $table = 'comments';
 
-    /**
-     * Return the question related to this comment.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function question()
+    public function owner()
     {
-        return $this->belongsTo('App\Question');
+        return $this->morphTo();
     }
 
     /**
@@ -31,6 +26,11 @@ class Comment extends Model
     public function votes()
     {
         return $this->hasMany('App\CommentVotes');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
     /********************
