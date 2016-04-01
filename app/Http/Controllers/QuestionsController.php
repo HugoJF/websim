@@ -124,7 +124,7 @@ class QuestionsController extends Controller
     public function myQuestions()
     {
         return view('question_list')->with([
-            'questions' => Auth::user()->questions()->paginate(10)
+            'questions' => Auth::user()->questions()->paginate(10),
         ]);
     }
 }

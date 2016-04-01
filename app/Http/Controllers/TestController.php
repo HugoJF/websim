@@ -44,7 +44,7 @@ class TestController extends Controller
     public function myTests()
     {
         return view('test_list')->with([
-            'tests' => Auth::user()->tests()->paginate(10)
+            'tests' => Auth::user()->tests()->paginate(10),
         ]);
     }
 
