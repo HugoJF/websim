@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\Contracts\TestRepository;
 
 class HomeController extends Controller
 {

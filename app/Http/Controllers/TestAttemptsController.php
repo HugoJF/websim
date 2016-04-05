@@ -34,7 +34,7 @@ class TestAttemptsController extends Controller
 
         // Redirect to homepage if test is already completed
         if ($attempt->finished === true) {
-            return redirect('/result/'.$attempt_id);
+            return redirect()->route('attemptsResult', ['attempt_id' => $attempt_id]);
         }
 
         // Test questions
@@ -64,7 +64,7 @@ class TestAttemptsController extends Controller
             $attempt->finished = true;
             $attempt->save();
 
-            return redirect('/attempts/result/'.$attempt->id);
+            return redirect()->route('attemptsResult', ['attempt_id' => $attempt_id]);
         }
 
         $questionIndex = $offsetAmount % ($remainingQuestions->count());
@@ -77,7 +77,7 @@ class TestAttemptsController extends Controller
         return view('question')->with([
             'attempt'          => $attempt,
             'question'         => $question,
-            'skipQuestionPath' => 'attempts/continue/'.$attempt->id.'/'.($questionIndex + 1),
+            'skipQuestionPath' => route('attemptsContinueWithSkip', ['attempt_id' => $attempt->id, 'question_index' => $questionIndex + 1]),
         ]);
     }
 
@@ -106,7 +106,7 @@ class TestAttemptsController extends Controller
             return 'More than 1';
         }
 
-        return redirect('/attempts/continue/'.$attempts->first()->id);
+        return redirect()->route('attemptsContinue', ['attempt_id' => $attempts->first()->id]);
     }
 
     public function result($attempt_id = -1)

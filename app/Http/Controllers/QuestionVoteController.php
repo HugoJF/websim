@@ -49,6 +49,6 @@ class QuestionVoteController extends Controller
 
         // Redirect to page
         // TODO Custom redirect
-        return redirect('questions/'.$questionId);
+        return redirect()->route('questionsView', ['question_id' => $questionId]);
     }
 }

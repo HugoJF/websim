@@ -63,7 +63,7 @@ class TestController extends Controller
 
         $test->save();
 
-        return redirect('/test/'.$test->id);
+        return redirect()->route('testsView', ['test_id' => $test->id]);
     }
 
     public function showCreateForm()
@@ -90,6 +90,6 @@ class TestController extends Controller
 
         $test->questions()->save($question);
 
-        return redirect('test/'.$test->id);
+        return redirect()->route('testsView', ['test_id' => $test->id]);
     }
 }
