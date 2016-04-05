@@ -25,82 +25,73 @@
 Route::group(['middleware' => 'web'], function () {
 
     // Authentication Routes...
-    Route::get('login', 'Auth\AuthController@showLoginForm');
-    Route::post('login', 'Auth\AuthController@login');
-    Route::get('logout', 'Auth\AuthController@logout');
+    Route::get('login', 'Auth\AuthController@showLoginForm')->name('authLoginPost');
+    Route::post('login', 'Auth\AuthController@login')->name('authLogin');
+    Route::get('logout', 'Auth\AuthController@logout')->name('authLogout');
 
     // Registration Routes...
-    Route::get('register', 'Auth\AuthController@showRegistrationForm');
-    Route::post('register', 'Auth\AuthController@register');
+    Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('authRegisterForm');
+    Route::post('register', 'Auth\AuthController@register')->name('authRegister');
 
     // Password Reset Routes...
-    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset', 'Auth\PasswordController@reset');
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm')->name('authResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail')->name('authSendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset')->name('authReset');
 
     // Home page Routes...
-    Route::get('/home', 'HomeController@index');
-    Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index')->name('indexHome');
+    Route::get('/', 'HomeController@index')->name('index');
 
     // Test Attempts
-    Route::get('/attempts', 'TestAttemptsController@index');
-    Route::get('/attempts/continue/{attempt_id}', 'TestAttemptsController@continueTest');
-    Route::get('/attempts/continue/{attempt_id}/{question_index}', 'TestAttemptsController@continueTest');
-    Route::get('/attempts/create/{test_id}', 'TestAttemptsController@createAttempt');
-    Route::get('/attempts/result/{attempt_id}', 'TestAttemptsController@result');
+    Route::get('/attempts', 'TestAttemptsController@index')->name('attemptsIndex');
+    Route::get('/attempts/continue/{attempt_id}', 'TestAttemptsController@continueTest')->name('attemptsContinue');
+    Route::get('/attempts/continue/{attempt_id}/{question_index}', 'TestAttemptsController@continueTest')->name('attemptsContinueWithSkip');
+    Route::get('/attempts/create/{test_id}', 'TestAttemptsController@createAttempt')->name('attemptsCreate');
+    Route::get('/attempts/result/{attempt_id}', 'TestAttemptsController@result')->name('attemptsResult');
 
     // Test
-    Route::get('/test', 'TestController@listTests');
-    Route::get('/test/create', 'TestController@showCreateForm'); // TODO - Hard
-    Route::get('/test/{stub}', 'TestController@stub')->where('stub', '[A-Za-z]+');
-    Route::get('/test/{test_id}', 'TestController@index');
+    Route::get('/test', 'TestController@listTests')->name('testIndex');
+    Route::get('/test/create', 'TestController@showCreateForm')->name('testCreateForm');
+    Route::get('/test/{stub}', 'TestController@stub')->where('stub', '[A-Za-z]+')->name('testViewStub');
+    Route::get('/test/{test_id}', 'TestController@index')->name('testView');
 
-    Route::post('/test/create', 'TestController@create');
+    Route::post('/test/create', 'TestController@create')->name('testCreate');
 
     // Tests
-    Route::get('/tests/add_question/{question_id}', 'TestController@showAddQuestionForm');
-    Route::post('/tests/add_question/{question_id}', 'TestController@addQuestion');
+    Route::get('/tests/add_question/{question_id}', 'TestController@showAddQuestionForm')->name('testsAddQuestionForm');
+    Route::post('/tests/add_question/{question_id}', 'TestController@addQuestion')->name('testsAddQuestion');
 
     // Answers
-    Route::post('answers/submit', 'AnswersController@submit');
+    Route::post('answers/submit', 'AnswersController@submit')->name('answersSubmit');
 
     // Questions
-    Route::get('/questions', 'QuestionsController@listAllQuestions');
-    Route::get('/questions/submit', 'QuestionsController@showSubmitForm');
-    Route::get('/questions/search/', 'QuestionsController@search');
-    Route::get('/questions/flag/{question_id}', 'QuestionsController@showFlagForm');
-    Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion');
-    Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments');
+    Route::get('/questions', 'QuestionsController@listAllQuestions')->name('questionsIndex');
+    Route::get('/questions/submit', 'QuestionsController@showSubmitForm')->name('questionsSubmitForm');
+    Route::get('/questions/search/', 'QuestionsController@search')->name('questionsSearch');
+    Route::get('/questions/flag/{question_id}', 'QuestionsController@showFlagForm')->name('questionsFlagForm');
+    Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion')->name('questionsView');
+    Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments')->name('questionsComments');
 
-    Route::post('/questions/flag', 'QuestionsController@flag');
-    Route::post('/questions/submit', 'QuestionsController@submit');
+    Route::post('/questions/flag', 'QuestionsController@flag')->name('questionsSubmit');
+    Route::post('/questions/submit', 'QuestionsController@submit')->name('questionsFlag');
 
     // Question votes
-    Route::post('/question_vote/', 'QuestionVoteController@vote');
+    Route::post('/question_vote/', 'QuestionVoteController@vote')->name('questionVotesVote');
 
     // Profile
-    Route::get('/profile/summary', 'ProfileController@summary'); // TODO
-    Route::get('/profile/attempts', 'TestAttemptsController@index');
-    Route::get('/profile/answers', 'AnswersController@index');
-    Route::get('/profile/questions', 'QuestionsController@myQuestions');
-    Route::get('/profile/tests', 'TestController@myTests');
+    Route::get('/profile/summary', 'ProfileController@summary')->name('profileSummary'); // TODO
+    Route::get('/profile/attempts', 'TestAttemptsController@index')->name('profileAttempts');
+    Route::get('/profile/answers', 'AnswersController@index')->name('profileAnswers');
+    Route::get('/profile/questions', 'QuestionsController@myQuestions')->name('profileQuestions');
+    Route::get('/profile/tests', 'TestController@myTests')->name('profileTests');
 
     // Categories
-    Route::get('/categories/', 'CategoriesController@index');
-    Route::get('/categories/json', 'CategoriesController@json');
-    Route::get('/categories/add/{category_id}', 'CategoriesController@showAddForm');
-    Route::get('/categories/{category_id}', 'CategoriesController@show');
-    Route::get('/categories/{category_id}/browse', 'QuestionsController@category');
+    Route::get('/categories/', 'CategoriesController@index')->name('categories');
+    Route::get('/categories/json', 'CategoriesController@json')->name('categoriesJson');
+    Route::get('/categories/add/{category_id}', 'CategoriesController@showAddForm')->name('categoriesAdd');
+    Route::get('/categories/{category_id}', 'CategoriesController@show')->name('categoriesView');
+    Route::get('/categories/{category_id}/browse', 'QuestionsController@category')->name('categoriesBrowse');
 
-    Route::post('/categories/add', 'CategoriesController@submit');
+    Route::post('/categories/add', 'CategoriesController@submit')->name('categoriesSubmit');
 
-    //DEBUGGING
-    Route::get('/do', function () {
-        return \App\Question::find(1)->category()->associate(\App\Category::find(1));
-    });
-
-    //Version
-    Route::get('/debug', function () {
-        return phpinfo();
-    });
 });
