@@ -1,10 +1,10 @@
 <div class="panel panel-default panel-primary">
 
     <div class="clearfix panel-heading">
-        <a href="{{ url('questions/' . $question->id) }}" class="panel-title">{{ $question->question_title }}</a>
+        <a href="{{ route('questionsView', ['question_id' => $question->id]) }}" class="panel-title">{{ $question->question_title }}</a>
         <div class="pull-right" id="rating">
 
-            {{ Form::open(['url' => url('/question_vote/'), 'style' => 'display: inline']) }}
+            {{ Form::open(['url' => route('questionVotesVote'), 'style' => 'display: inline']) }}
                 {{ Form::hidden('question_id', $question->id) }}
                 {{ Form::hidden('direction', 'true') }}
 
@@ -14,7 +14,7 @@
             {{ Form::close() }}
 
 
-            {{ Form::open(['url' => url('/question_vote/'), 'style' => 'display: inline']) }}
+            {{ Form::open(['url' => route('questionVotesVote'), 'style' => 'display: inline']) }}
                 {{ Form::hidden('question_id', $question->id) }}
                 {{ Form::hidden('direction', 'false') }}
 
@@ -23,18 +23,18 @@
                 </button>
             {{ Form::close() }}
 
-            <a href="{{ url('/tests/add_question/'.$question->id) }}" type="submit" class="btn btn-link">
+            <a href="{{ route('testsAddQuestionForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
                 <i style="color:white;" class="fa fa-2x fa-plus"></i>
             </a>
 
-            <a href="{{ url('/questions/flag/'.$question->id) }}" type="submit" class="btn btn-link">
+            <a href="{{ route('questionFlagForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
                 <i style="color:white;" class="fa fa-2x fa-flag"></i>
             </a>
 
         </div>
     </div>
 
-    {{ Form::open(['url' => 'answers/submit']) }}
+    {{ Form::open(['url' => route('answersSubmit')]) }}
 
     <div class="panel-body">
         <u><p>Question alternatives:</p></u>
@@ -70,7 +70,7 @@
 
     </div>
     <div class="panel-footer">
-        <a href="{{ url('questions/' . $question->id) }}">
+        <a href="{{ route('questionsView', ['question_id' => $question->id]) }}">
             <p style="margin-bottom: 0px" class="text-center">Question made by {{ $question->user->name }}, scoring {{ $question->getScore() }} points</p>
 
             <p style="margin-bottom: 0px" class="text-center">{{ $question->getCorrectAnswersPercentage() }}% correct answers out of {{ $question->getTotalAnswers() }} answers</p>

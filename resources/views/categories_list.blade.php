@@ -12,8 +12,8 @@
                     </ol>
                 @endif
                 <h2>{{ $categories[$categories->keys()[0]]->name }}</h2>
-                <p><a href="/categories/add/{{ $categories[$categories->keys()[0]]->id }}">Add a new category to {{ $categories[$categories->keys()[0]]->name }}</a></p>
-                <p><a href="/categories/{{ $categories[$categories->keys()[0]]->id }}/browse">Browse questions for category {{ $categories[$categories->keys()[0]]->name }}</a></p>
+                <p><a href="{{ route('categoriesAdd', ['category_id' => $categories[$categories->keys()[0]]->id])  }}">Add a new category to {{ $categories[$categories->keys()[0]]->name }}</a></p>
+                <p><a href="{{ route('categoriesView', ['category_id' => $categories[$categories->keys()[0]]->id ]) }}/browse">Browse questions for category {{ $categories[$categories->keys()[0]]->name }}</a></p>
                 <hr>
                 @include('partials.category_tree', array(
                     'category_tree' => $categories[$categories->keys()[0]]->children

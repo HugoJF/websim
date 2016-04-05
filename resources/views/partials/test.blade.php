@@ -20,7 +20,7 @@
         @endforeach
     </div>
     <div class="panel-footer">
-        <a href="{{ url('test/' . $test->id) }}">
+        <a href="{{ route('testView', ['test_id' => $test->id])  }}">
             <p style="margin-bottom: 0px" class="text-center">Test created by {{ $test->user->name }}</p>
             @if($test->unlisted)
                 <p style="margin-bottom: 0px" class="text-center">This test is unlisted.</p>
@@ -32,7 +32,7 @@
 
     </div>
     <div class="panel-footer clearfix">
-        <a href="{{ url('attempts/create/' . $test->id) }}">
+        <a href="{{ route('attemptsCreateForm', ['test_id' => $test->id]) }}">
             <button type="button" class="btn btn-block btn-primary">Begin test</button>
         </a>
     </div>

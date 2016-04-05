@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h1>Adding new sub-category to: {{ $category->name }}</h1>
 
-                {{ Form::open(['url' => 'categories/add']) }}
+                {{ Form::open(['url' => route('categoriesSubmit')]) }}
 
                 <div class="form-group">
                     {{ Form::label('Category name:') }}

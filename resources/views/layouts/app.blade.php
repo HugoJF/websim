@@ -47,21 +47,21 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/categories') }}">Category list</a></li>
-                    <li><a href="{{ url('/test') }}">Tests</a></li>
-                    <li><a href="{{ url('/test/create') }}">Create test</a></li>
-                    <li><a href="{{ url('/questions') }}">Questions</a></li>
-                    <li><a href="{{ url('/questions/submit') }}">Create question</a></li>
-                    <li><a href="{{ url('/questions/search') }}">Question search</a></li>
+                    <li><a href="{{ route('indexHome') }}">Home</a></li>
+                    <li><a href="{{ route('categoriesIndex') }}">Category list</a></li>
+                    <li><a href="{{ route('testIndex') }}">Tests</a></li>
+                    <li><a href="{{ route('testCreateForm') }}">Create test</a></li>
+                    <li><a href="{{ route('questionsIndex') }}">Questions</a></li>
+                    <li><a href="{{ route('questionsSubmitForm') }}">Create question</a></li>
+                    <li><a href="{{ route('questionsSearch') }}">Question search</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ route('authLogin') }}">Login</a></li>
+                        <li><a href="{{ route('authRegister') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -69,13 +69,13 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/profile/summary') }}"><i class="fa fa-btn fa-list"></i>Summary</a></li>
-                                <li><a href="{{ url('/profile/attempts') }}"><i class="fa fa-btn fa-tasks"></i>My Attempts</a></li>
-                                <li><a href="{{ url('/profile/answers') }}"><i class="fa fa-btn fa-check-square"></i>My Answers</a></li>
-                                <li><a href="{{ url('/profile/questions') }}"><i class="fa fa-btn fa-pencil"></i>My Questions</a></li>
-                                <li><a href="{{ url('/profile/tests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a></li>
+                                <li><a href="{{ route('profileSummary') }}"><i class="fa fa-btn fa-list"></i>Summary</a></li>
+                                <li><a href="{{ route('profileAttempts') }}"><i class="fa fa-btn fa-tasks"></i>My Attempts</a></li>
+                                <li><a href="{{ route('profileAnswers') }}"><i class="fa fa-btn fa-check-square"></i>My Answers</a></li>
+                                <li><a href="{{ route('profileQuestions') }}"><i class="fa fa-btn fa-pencil"></i>My Questions</a></li>
+                                <li><a href="{{ route('profileTests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ route('authLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
@@ -87,8 +87,8 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{ asset('jquery.min.js') }}"></script>
+    <script src="{{ asset('bootstrap.min.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

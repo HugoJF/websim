@@ -6,7 +6,7 @@
         <div class="col-md-12">
             @foreach($answers as $answer)
                 @include('partials.answer', [
-                'answer' => $answer,
+                    'answer' => $answer,
                 ])
             @endforeach
         </div>

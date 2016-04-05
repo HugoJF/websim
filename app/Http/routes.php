@@ -86,7 +86,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile/tests', 'TestController@myTests')->name('profileTests');
 
     // Categories
-    Route::get('/categories/', 'CategoriesController@index')->name('categories');
+    Route::get('/categories/', 'CategoriesController@index')->name('categoriesIndex');
     Route::get('/categories/json', 'CategoriesController@json')->name('categoriesJson');
     Route::get('/categories/add/{category_id}', 'CategoriesController@showAddForm')->name('categoriesAdd');
     Route::get('/categories/{category_id}', 'CategoriesController@show')->name('categoriesView');

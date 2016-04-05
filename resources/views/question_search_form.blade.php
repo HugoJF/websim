@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h1>Searching questions</h1>
 
-                {{ Form::open(['url' => 'questions/search', 'method' => 'GET']) }}
+                {{ Form::open(['url' => route('questionsSearch'), 'method' => 'GET']) }}
 
                 <div class="form-group">
                     {{ Form::label('Search:') }}

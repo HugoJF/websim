@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h1>Create test</h1>
 
-                {{ Form::open(['url' => 'test/create']) }}
+                {{ Form::open(['url' => route('testCreate')]) }}
 
                 <div class="form-group">
                     {{ Form::label('Test name:') }}

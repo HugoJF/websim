@@ -20,6 +20,10 @@ class CreateVotesTable extends Migration
             $table->integer('owner_id')->unsigned();
             $table->string('owner_type');
 
+            // User
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
             // TRUE if positive, FALSE if negative
             $table->boolean('direction');
 

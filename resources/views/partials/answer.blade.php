@@ -27,8 +27,8 @@
         </ul>
     </div>
     <div class="panel-footer">
-        <a href="{{ url('questions/' . $answer->question->id) }}">
-            <p style="margin-bottom: 0px" class="text-center">Test made by: {{ $answer->question->user->name }}</p>
+        <a href="{{ route('questionsView', ['question_id' => $answer->question->id] )}}">
+            <p style="margin-bottom: 0px" class="text-center">Question made by: {{ $answer->question->user->name }}</p>
         </a>
 
     </div>
