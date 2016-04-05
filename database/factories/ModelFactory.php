@@ -81,7 +81,7 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
 /*
  * App\Vote
  */
-$factory->define(App\Vote::class, function(Faker\Generator $faker) {
+$factory->define(App\Vote::class, function (Faker\Generator $faker) {
    return [
         'direction' => $faker->boolean(70),
    ];
