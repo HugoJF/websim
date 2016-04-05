@@ -28,7 +28,7 @@ class Question extends Model
      */
     public function votes()
     {
-        return $this->hasMany('App\QuestionVote');
+        return $this->morphMany('App\Vote', 'owner');
     }
 
     public function user()

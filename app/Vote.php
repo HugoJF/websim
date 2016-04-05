@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class QuestionVote extends Model
+class Vote extends Model
 {
-    protected $table = 'question_votes';
+    protected $table = 'votes';
 
-    public function question()
+    public function owner()
     {
-        return $this->belongsTo('App\Question');
+        return $this->morphTo();
     }
 
     public function user()

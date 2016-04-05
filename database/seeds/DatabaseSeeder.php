@@ -16,16 +16,10 @@ class DatabaseSeeder extends Seeder
                 $q->comments()->saveMany(factory(App\Comment::class, 5)->create([
                     'user_id'     => $u->id,
                 ])->each(function (App\Comment $c) use ($u, $q) {
-                    $c->votes()->saveMany(factory(App\CommentVotes::class, 5)->create([
-                        'user_id'    => $u->id,
-                        'comment_id' => $c->id,
-                    ]));
+                    $c->votes()->saveMany(factory(App\Vote::class, 5)->create());
                 }));
 
-                $q->votes()->saveMany(factory(App\QuestionVote::class, 5)->create([
-                    'user_id'     => $u->id,
-                    'question_id' => $q->id,
-                ]));
+                $q->votes()->saveMany(factory(App\Vote::class, 5)->create());
             }));
 
             $u->tests()->saveMany(factory(App\Test::class, 5)->create()->each(function (App\Test $t) use ($u) {

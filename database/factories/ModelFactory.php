@@ -79,12 +79,12 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
 });
 
 /*
- * App\QuestionVote
+ * App\Vote
  */
-$factory->define(App\QuestionVote::class, function (Faker\Generator $faker) {
-    return [
-        'direction' => $faker->boolean(65),
-    ];
+$factory->define(App\Vote::class, function(Faker\Generator $faker) {
+   return [
+        'direction' => $faker->boolean(70),
+   ];
 });
 
 /*
@@ -114,14 +114,6 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     ];
 });
 
-/*
- * App\CommentVotes factory
- */
-$factory->define(App\CommentVotes::class, function (Faker\Generator $faker) {
-    return [
-        'direction' => $faker->boolean(65),
-    ];
-});
 /*
  * App\Category factory
  */

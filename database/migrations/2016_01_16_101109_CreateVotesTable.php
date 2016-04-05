@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateQuestionVotesTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,13 @@ class CreateQuestionVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_votes', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             // Primary key
             $table->increments('id');
 
-            // What user created the vote
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-
-            // What question the vote belongs to
-            $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            // Polymorphic relation
+            $table->integer('owner_id')->unsigned();
+            $table->string('owner_type');
 
             // TRUE if positive, FALSE if negative
             $table->boolean('direction');
@@ -39,6 +35,6 @@ class CreateQuestionVotesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('question_votes');
+        Schema::drop('votes');
     }
 }
