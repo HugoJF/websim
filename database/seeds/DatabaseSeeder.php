@@ -44,9 +44,9 @@ class DatabaseSeeder extends Seeder
                 while ($questions->count() != 0) {
                     $ta->answers()->save(factory(App\Answer::class)->make([
                         'question_id' => $questions->pop()->id,
-                        'test_id' => App\TestAttempt::find($ta->id)->test->id,
-                        'user_id' => $u->id,
-                        'attempt_id' => $ta->id,
+                        'test_id'     => App\TestAttempt::find($ta->id)->test->id,
+                        'user_id'     => $u->id,
+                        'attempt_id'  => $ta->id,
                     ]));
                 }
             }));
