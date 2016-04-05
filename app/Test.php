@@ -48,9 +48,9 @@ class Test extends Model
     public function getViewLink()
     {
         if ($this->unlisted) {
-            return url('/test/'.$this->stub);
+            return route('testViewStub', ['stub' => $this->stub]);
         } else {
-            return url('/test/'.$this->id);
+            return route('testView', ['test_id' => $this->id]);
         }
     }
 

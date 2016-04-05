@@ -32,6 +32,7 @@ class Answer extends Model
         return $this->belongsTo('App\Test');
     }
 
+    // This is implemented to allow mass assignment direct from form submissions where `null` values become empty values and we need to pass a `null string` to avoid this problem
     public function setAttemptIdAttribute($value)
     {
         $this->attributes['attempt_id'] = $value == 'null' ? null : $value;

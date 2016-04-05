@@ -25,7 +25,7 @@ class TestAttempt extends Model
 
     public function getResultURL()
     {
-        return url('attempts/result/'.$this->id);
+        return route('attemptsResult', ['attempt_id' => $this->id]);
     }
 
     public function getAnsweredQuestionsAmount()

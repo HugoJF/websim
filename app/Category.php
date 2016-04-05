@@ -22,11 +22,11 @@ class Category extends Node
 
     public function getViewLink()
     {
-        return url('/categories/'.$this->id);
+        return route('categoriesView', ['category_id' => $this->id]);
     }
 
     public function getParentLink()
     {
-        return url('/categories/'.$this->getParentId());
+        return route('categoriesView', ['category_id' => $this->id]);
     }
 }
