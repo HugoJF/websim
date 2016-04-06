@@ -6,7 +6,6 @@ use App\Category;
 use App\Question;
 use App\QuestionVote;
 use Auth;
-use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -102,7 +101,7 @@ class QuestionsController extends Controller
     public function showFlagForm($question_id)
     {
         return view('flag_form')->with([
-            'question' => Question::find($question_id)
+            'question' => Question::find($question_id),
         ]);
     }
 
