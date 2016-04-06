@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Question;
-use App\Vote;
 use App\Test;
+use App\Vote;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -23,6 +23,7 @@ class VoteController extends Controller
 
         return $vote;
     }
+
     public function questionVote($id, Request $r)
     {
         return $this->handleVote(Question::find($id), $r);
@@ -46,7 +47,6 @@ class VoteController extends Controller
 
         $direction = Input::get('direction') == 'true' ? true : false;
 
-
         // Tries to find a vote for the same question
         $vote = $model->votes()->where([
             'user_id'     => Auth::user()->id,
@@ -58,7 +58,6 @@ class VoteController extends Controller
 
             $vote->user()->associate(Auth::user());
             $vote->owner()->associate($model);
-
         } else {
             $vote = $vote->first();
         }
