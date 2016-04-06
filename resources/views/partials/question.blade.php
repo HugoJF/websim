@@ -4,7 +4,7 @@
         <a href="{{ route('questionsView', ['question_id' => $question->id]) }}" class="panel-title">{{ $question->question_title }}</a>
         <div class="pull-right" id="rating">
 
-            {{ Form::open(['url' => route('questionVotesVote'), 'style' => 'display: inline']) }}
+            {{ Form::open(['url' => route('questionsVote', ['question_id' => $question->id]), 'style' => 'display: inline']) }}
                 {{ Form::hidden('question_id', $question->id) }}
                 {{ Form::hidden('direction', 'true') }}
 
@@ -14,8 +14,7 @@
             {{ Form::close() }}
 
 
-            {{ Form::open(['url' => route('questionVotesVote'), 'style' => 'display: inline']) }}
-                {{ Form::hidden('question_id', $question->id) }}
+            {{ Form::open(['url' => route('questionsVote', ['question_id' => $question->id]), 'style' => 'display: inline']) }}
                 {{ Form::hidden('direction', 'false') }}
 
                 <button type="submit" class="btn btn-link">

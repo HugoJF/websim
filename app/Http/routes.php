@@ -72,11 +72,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion')->name('questionsView');
     Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments')->name('questionsComments');
 
+    Route::post('/questions/vote/{question_id}', 'VoteController@questionVote')->name('questionsVote');
     Route::post('/questions/flag', 'QuestionsController@flag')->name('questionsFlag');
     Route::post('/questions/submit', 'QuestionsController@submit')->name('questionsSubmit');
-
-    // Question votes
-    Route::post('/question_vote/', 'QuestionVoteController@vote')->name('questionVotesVote');
 
     // Profile
     Route::get('/profile/summary', 'ProfileController@summary')->name('profileSummary'); // TODO
@@ -93,5 +91,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/categories/{category_id}/browse', 'QuestionsController@category')->name('categoriesBrowse');
 
     Route::post('/categories/add', 'CategoriesController@submit')->name('categoriesSubmit');
+
+    Route::get('/debug', 'VoteController@dooo');
 
 });

@@ -21,22 +21,10 @@ class QuestionsController extends Controller
 
     public function viewQuestion($id = -1)
     {
-        $vote = QuestionVote::where([
-            'question_id' => $id,
-            'user_id'     => Auth::user()->id,
-        ]);
-
-        if ($vote->count() == 0) {
-            $vote = null;
-        } else {
-            $vote = (bool) $vote->first()->direction;
-        }
-
         $question = Question::with('votes', 'votes.user', 'user', 'comments', 'comments.user')->find($id);
 
         return view('question')->with([
             'question' => $question,
-            'vote'     => $vote,
         ]);
     }
 
