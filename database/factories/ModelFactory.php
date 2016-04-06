@@ -133,7 +133,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
  */
 $factory->define(App\Report::class, function (Faker\Generator $faker) {
     return [
-        'reason' => $faker->text(100),
+        'reason'  => $faker->text(100),
         'details' => $faker->paragraphs(2, true),
     ];
 });
