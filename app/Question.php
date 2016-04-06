@@ -56,6 +56,11 @@ class Question extends Model
         return $this->hasMany('App\Answer');
     }
 
+    public function reports()
+    {
+        return $this->morphMany('App\Report', 'owner');
+    }
+
     public function pivot()
     {
         return $this->hasOne('App\QuestionTest');

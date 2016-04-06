@@ -27,7 +27,7 @@
                 <i style="color:white;" class="fa fa-2x fa-plus"></i>
             </a>
 
-            <a href="{{ route('questionFlagForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
+            <a href="{{ route('questionsFlagForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
                 <i style="color:white;" class="fa fa-2x fa-flag"></i>
             </a>
 

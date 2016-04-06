@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         factory(App\User::class, 50)->create()->each(function (App\User $u) {
             $u->questions()->saveMany(factory(App\Question::class, 5)->create()->each(function (App\Question $q) use ($u) {
+                $q->reports()->saveMany(factory(App\Report::class, 2)->create([
+                    'user_id' => $u->id,
+                ]));
                 $q->comments()->saveMany(factory(App\Comment::class, 5)->create([
                     'user_id' => $u->id,
                 ])->each(function (App\Comment $c) use ($u, $q) {
@@ -27,6 +30,9 @@ class DatabaseSeeder extends Seeder
             }));
 
             $u->tests()->saveMany(factory(App\Test::class, 5)->create()->each(function (App\Test $t) use ($u) {
+                $t->reports()->saveMany(factory(App\Report::class, 2)->create([
+                    'user_id' => $u->id,
+                ]));
                 $t->comments()->saveMany(factory(App\Comment::class, 5)->create([
                     'user_id' => $u->id,
                 ]));

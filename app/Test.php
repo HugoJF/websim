@@ -40,6 +40,11 @@ class Test extends Model
         return $this->morphMany('App\Comment', 'owner');
     }
 
+    public function reports()
+    {
+        return $this->morphMany('App\Report', 'owner');
+    }
+
     public function pivot()
     {
         return $this->hasOne('App\QuestionTest');

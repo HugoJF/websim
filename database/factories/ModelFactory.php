@@ -127,3 +127,13 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'updated_at' => $created_at,
     ];
 });
+
+/*
+ * App\Report factory
+ */
+$factory->define(App\Report::class, function (Faker\Generator $faker) {
+    return [
+        'reason' => $faker->text(100),
+        'details' => $faker->paragraphs(2, true),
+    ];
+});

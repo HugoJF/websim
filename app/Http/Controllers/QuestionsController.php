@@ -111,14 +111,16 @@ class QuestionsController extends Controller
         return redirect($question->getViewLink());
     }
 
-    public function showFlagForm()
+    public function showFlagForm($question_id)
     {
-        return Config::get('enums.question_flags');
+        return view('flag_form')->with([
+            'question' => Question::find($question_id)
+        ]);
     }
 
     public function flag(Request $request)
     {
-        return 'Flagging';
+        return Input::all();
     }
 
     public function myQuestions()
