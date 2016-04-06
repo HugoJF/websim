@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Question;
-use App\QuestionVote;
+use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -105,9 +105,20 @@ class QuestionsController extends Controller
         ]);
     }
 
-    public function flag(Request $request)
+    public function flag(Request $request, $question_id)
     {
-        return Input::all();
+        $this->validate($request, [
+            'reason'  => 'required',
+            'details' => 'required',
+        ]);
+        $report = new Report(Input::all());
+
+        $report->owner()->associate(Question::find($question_id));
+        $report->user()->associate(Auth::user());
+
+        $report->save();
+
+        return $report;
     }
 
     public function myQuestions()

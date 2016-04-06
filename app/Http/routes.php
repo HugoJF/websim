@@ -73,7 +73,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments')->name('questionsComments');
 
     Route::post('/questions/vote/{question_id}', 'VoteController@questionVote')->name('questionsVote');
-    Route::post('/questions/flag', 'QuestionsController@flag')->name('questionsFlag');
+    Route::post('/questions/flag/{question_id}', 'QuestionsController@flag')->name('questionsFlag');
     Route::post('/questions/submit', 'QuestionsController@submit')->name('questionsSubmit');
 
     // Profile
