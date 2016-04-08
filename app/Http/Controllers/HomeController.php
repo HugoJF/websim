@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\TestAttempt;
+use App\User;
+use Auth;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -16,7 +20,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with([
+            'test_attempts' => Auth::user()->testAttempts()->unfinished()->limit(2)->get()
+        ]);
     }
 
     public function something()

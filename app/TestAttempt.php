@@ -28,6 +28,21 @@ class TestAttempt extends Model
         return route('attemptsResult', ['attempt_id' => $this->id]);
     }
 
+    public function getViewURL()
+    {
+        return route('attemptsContinue', ['attempt_id' => $this->id]);
+    }
+
+    public function scopeUnfinished($query)
+    {
+        return $query->where('finished', 0);
+    }
+
+    public function scopeFinished($query)
+    {
+        return $query->where('finished', 1);
+    }
+
     public function getAnsweredQuestionsAmount()
     {
         return $this->answers->count();

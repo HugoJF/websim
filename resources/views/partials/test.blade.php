@@ -32,7 +32,7 @@
 
     </div>
     <div class="panel-footer clearfix">
-        <a href="{{ route('attemptsCreateForm', ['test_id' => $test->id]) }}">
+        <a href="{{ route('attemptsCreate', ['test_id' => $test->id]) }}">
             <button type="button" class="btn btn-block btn-primary">Begin test</button>
         </a>
     </div>

@@ -20,7 +20,7 @@ class QuestionsController extends Controller
 
     public function viewQuestion($id = -1)
     {
-        $question = Question::with('votes', 'votes.user', 'user', 'comments', 'comments.user')->find($id);
+        $question = Question::with('user', 'votes', 'votes.user', 'comments', 'comments.user')->find($id);
 
         return view('question')->with([
             'question' => $question,
@@ -118,7 +118,10 @@ class QuestionsController extends Controller
 
         $report->save();
 
-        return $report;
+        $request->session()->flash('success', 'Report submitted sucessfully!');
+
+
+        return redirect()->back();
     }
 
     public function myQuestions()

@@ -8,7 +8,8 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
+          type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
@@ -26,67 +27,110 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Websim
-                </a>
-            </div>
+            <!-- Branding Image -->
+            <a class="navbar-brand" href="{{ url('/') }}">
+                Websim
+            </a>
+        </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ route('indexHome') }}">Home</a></li>
-                    <li><a href="{{ route('categoriesIndex') }}">Category list</a></li>
-                    <li><a href="{{ route('testIndex') }}">Tests</a></li>
-                    <li><a href="{{ route('testCreateForm') }}">Create test</a></li>
-                    <li><a href="{{ route('questionsIndex') }}">Questions</a></li>
-                    <li><a href="{{ route('questionsSubmitForm') }}">Create question</a></li>
-                    <li><a href="{{ route('questionsSearch') }}">Question search</a></li>
-                </ul>
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <!-- Left Side Of Navbar -->
+            <ul class="nav navbar-nav">
+                <li><a href="{{ route('indexHome') }}">Home</a></li>
+                <li><a href="{{ route('categoriesIndex') }}">Category list</a></li>
+                <li><a href="{{ route('testIndex') }}">Tests</a></li>
+                <li><a href="{{ route('testCreateForm') }}">Create test</a></li>
+                <li><a href="{{ route('questionsIndex') }}">Questions</a></li>
+                <li><a href="{{ route('questionsSubmitForm') }}">Create question</a></li>
+                <li><a href="{{ route('questionsSearch') }}">Question search</a></li>
+            </ul>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ route('authLogin') }}">Login</a></li>
-                        <li><a href="{{ route('authRegister') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ route('authLogin') }}">Login</a></li>
+                    <li><a href="{{ route('authRegister') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ route('profileSummary') }}"><i class="fa fa-btn fa-list"></i>Summary</a></li>
-                                <li><a href="{{ route('profileAttempts') }}"><i class="fa fa-btn fa-tasks"></i>My Attempts</a></li>
-                                <li><a href="{{ route('profileAnswers') }}"><i class="fa fa-btn fa-check-square"></i>My Answers</a></li>
-                                <li><a href="{{ route('profileQuestions') }}"><i class="fa fa-btn fa-pencil"></i>My Questions</a></li>
-                                <li><a href="{{ route('profileTests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('authLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('profileSummary') }}"><i class="fa fa-btn fa-list"></i>Summary</a>
+                            </li>
+                            <li><a href="{{ route('profileAttempts') }}"><i class="fa fa-btn fa-tasks"></i>My
+                                    Attempts</a></li>
+                            <li><a href="{{ route('profileAnswers') }}"><i class="fa fa-btn fa-check-square"></i>My
+                                    Answers</a></li>
+                            <li><a href="{{ route('profileQuestions') }}"><i class="fa fa-btn fa-pencil"></i>My
+                                    Questions</a></li>
+                            <li><a href="{{ route('profileTests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('authLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </div>
+</nav>
+@if(Session::has('success') || Session::has('info') || Session::has('warning') || Session::has('danger'))
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Notification alerts -->
+                @if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+                @if(Session::has('info'))
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        {{ Session::get('info') }}
+                    </div>
+                @endif
+                @if(Session::has('warning'));
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    {{ Session::get('warning') }}
+                </div>
+                @endif
+                @if(Session::has('danger'))
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        {{ Session::get('danger') }}
+                    </div>
+                @endif
             </div>
         </div>
-    </nav>
+    </div>
+    @endif
 
     @yield('content')
 
-    <!-- JavaScripts -->
+            <!-- JavaScripts -->
     <script src="{{ asset('jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap.min.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
