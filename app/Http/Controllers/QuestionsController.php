@@ -6,9 +6,9 @@ use App\Category;
 use App\Question;
 use App\Report;
 use Auth;
-use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Session;
 
 class QuestionsController extends Controller
 {
@@ -123,7 +123,6 @@ class QuestionsController extends Controller
 
         $request->session()->flash('success', 'Report submitted sucessfully!');
 
-
         return redirect()->back();
     }
 
@@ -170,7 +169,6 @@ class QuestionsController extends Controller
         Session::flash('success', 'Question updated successfully');
 
         return redirect($question->getViewURL());
-
     }
 
     public function myQuestions()
