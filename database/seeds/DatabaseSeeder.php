@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(App\User::class, 50)->create()->each(function (App\User $u) {
+            $u->notifications()->saveMany(factory(App\Notification::class, 20)->create([
+                'user_id' => $u->id,
+            ]));
+
             $u->questions()->saveMany(factory(App\Question::class, 5)->create()->each(function (App\Question $q) use ($u) {
                 $q->reports()->saveMany(factory(App\Report::class, 2)->create([
                     'user_id' => $u->id,

@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Vote');
     }
 
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
+
     /**
      * Check if user is Administrator.
      *

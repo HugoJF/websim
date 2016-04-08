@@ -137,3 +137,10 @@ $factory->define(App\Report::class, function (Faker\Generator $faker) {
         'details' => $faker->paragraphs(2, true),
     ];
 });
+
+$factory->define(App\Notification::class, function (Faker\Generator $faker) {
+    return [
+        'notification' => $faker->sentence(20),
+        'read'         => $faker->boolean(30),
+    ];
+});

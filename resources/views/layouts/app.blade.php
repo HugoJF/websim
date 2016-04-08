@@ -67,6 +67,20 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <i class="fa fa-btn fa-2x fa-exclamation-circle">
+                                @if(Auth::user()->notifications()->count() !== 0)
+                                    <span style="position: relative;top: -15px;left: -10px;color: white;background-color: red;" class="badge">{{ Auth::user()->notifications()->count() }}</span>
+                                @endif
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach(Auth::user()->notifications()->get() as $notification)
+                                <li><a>{{ $notification->notification }}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 

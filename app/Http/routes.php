@@ -92,6 +92,19 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/categories/{category_id}', 'CategoriesController@show')->name('categoriesView');
     Route::get('/categories/{category_id}/browse', 'QuestionsController@category')->name('categoriesBrowse');
 
+    // Notifications
+    Route::get('/notifications/generate', function(Faker\Generator $faker) {
+        for($i = 0; $i < 20; $i++) {
+            $notification = new \App\Notification();
+            $notification->notification = $faker->sentence(10);
+            $notification->read = false;
+            $notification->user()->associate(Auth::user());
+            $notification->save();
+        }
+
+        return Auth::user()->notifications()->get();
+    });
+
     Route::post('/categories/add', 'CategoriesController@submit')->name('categoriesSubmit');
 
     Route::get('/debug', 'VoteController@dooo');
