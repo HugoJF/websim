@@ -93,8 +93,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/categories/{category_id}/browse', 'QuestionsController@category')->name('categoriesBrowse');
 
     // Notifications
-    Route::get('/notifications/generate', function(Faker\Generator $faker) {
-        for($i = 0; $i < 20; $i++) {
+    Route::get('/notifications/generate', function (Faker\Generator $faker) {
+        for ($i = 0; $i < 20; $i++) {
             $notification = new \App\Notification();
             $notification->notification = $faker->sentence(10);
             $notification->read = false;
