@@ -9,6 +9,8 @@ class Question extends Model
 {
     protected $table = 'questions';
 
+    protected $fillable = ['question_title', 'information', 'category_id'];
+
     private $jsonInformation = null;
 
     /**
@@ -82,7 +84,12 @@ class Question extends Model
         });
     }
 
-    public function getViewLink()
+    public function isUserOwner($user)
+    {
+        return $this->user->id == $user->id;
+    }
+
+    public function getViewURL()
     {
         return route('questionsView', ['question_id' => $this->id]);
     }
@@ -163,6 +170,13 @@ class Question extends Model
     public function isCorrect($index)
     {
         return $index == $this->getInformationAsJson()->correctAnswer;
+    }
+
+    public function clearAlternatives()
+    {
+        $this->getInformationAsJson();
+
+        $this->jsonInformation->possibleAnswers = [];
     }
 
     public function addAlternative($alternative)

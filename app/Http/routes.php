@@ -69,12 +69,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/questions/submit', 'QuestionsController@showSubmitForm')->name('questionsSubmitForm');
     Route::get('/questions/search/', 'QuestionsController@search')->name('questionsSearch');
     Route::get('/questions/flag/{question_id}', 'QuestionsController@showFlagForm')->name('questionsFlagForm');
+    Route::get('/questions/edit/{question_id}', 'QuestionsController@showEditForm')->name('questionsEditForm');
     Route::get('/questions/{question_id}', 'QuestionsController@viewQuestion')->name('questionsView');
     Route::get('/questions/{question_id}/comments', 'QuestionsController@viewQuestionComments')->name('questionsComments');
 
     Route::post('/questions/vote/{question_id}', 'VoteController@questionVote')->name('questionsVote');
     Route::post('/questions/flag/{question_id}', 'QuestionsController@flag')->name('questionsFlag');
     Route::post('/questions/submit', 'QuestionsController@submit')->name('questionsSubmit');
+    Route::post('/questions/edit/{question_id}', 'QuestionsController@edit')->name('questionsEdit');
 
     // Profile
     Route::get('/profile/summary', 'ProfileController@summary')->name('profileSummary'); // TODO

@@ -21,6 +21,11 @@
                     <i style="color:{{ $question->getCurrentUserVote() != null && (bool) $question->getCurrentUserVote()->direction === false ? 'red' : 'white' }}" class="fa fa-2x fa-thumbs-down"></i>
                 </button>
             {{ Form::close() }}
+            @if($question->isUserOwner(Auth::user()))
+                <a href="{{ route('questionsEditForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
+                    <i style="color:white;" class="fa fa-2x fa-pencil"></i>
+                </a>
+            @endif
 
             <a href="{{ route('testsAddQuestionForm', ['question_id' => $question->id]) }}" type="submit" class="btn btn-link">
                 <i style="color:white;" class="fa fa-2x fa-plus"></i>

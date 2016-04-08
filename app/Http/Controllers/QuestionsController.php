@@ -6,6 +6,7 @@ use App\Category;
 use App\Question;
 use App\Report;
 use Auth;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -85,6 +86,8 @@ class QuestionsController extends Controller
 
         $question->user()->associate(Auth::user()->id);
 
+        $question->category_id = Input::get('category_id');
+
         $question->question_title = Input::get('question_title');
 
         foreach (Input::get('question_alternatives') as $alternative) {
@@ -122,6 +125,52 @@ class QuestionsController extends Controller
 
 
         return redirect()->back();
+    }
+
+    public function showEditForm($question_id)
+    {
+        $categories = Category::all();
+
+        $select = [];
+
+        foreach ($categories as $category) {
+            $select[$category->id] = str_repeat('― ', $category->depth).$category->name;
+        }
+
+        return view('edit_question')->with([
+            'question'   => Question::find($question_id),
+            'categories' => $select,
+        ]);
+    }
+
+    public function edit(Request $request, $question_id)
+    {
+        $this->validate($request, [
+            'question_title'          => 'required|min:5',
+            'question_alternatives'   => 'required|array',
+            'question_alternatives.*' => 'required',
+            'correct_alternative'     => 'required|numeric',
+            'category_id'             => 'required',
+        ]);
+
+        $question = Question::find($question_id);
+
+        $question->fill(Input::all());
+
+        $question->clearAlternatives();
+
+        foreach (Input::get('question_alternatives') as $alternative) {
+            $question->addAlternative($alternative);
+        }
+
+        $question->setCorrectAlternative(Input::get('correct_alternative'));
+
+        $question->save();
+
+        Session::flash('success', 'Question updated successfully');
+
+        return redirect($question->getViewURL());
+
     }
 
     public function myQuestions()
