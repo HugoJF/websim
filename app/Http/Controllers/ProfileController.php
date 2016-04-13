@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
 use Illuminate\Support\Facades\Input;
 use Setting;
 
@@ -12,6 +10,7 @@ class ProfileController extends Controller
     public function summary()
     {
         dd(Setting::all());
+
         return 'This should be a summary';
     }
 
