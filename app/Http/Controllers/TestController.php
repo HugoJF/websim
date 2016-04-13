@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Test;
+use App\TestAttempt;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -34,10 +35,15 @@ class TestController extends Controller
 
     public function listTests()
     {
+        if(\Setting::get('filter_answered_tests')) {
+            $answeredTests = Auth::user()->testAttempts()->where('finished', 1)->select('test_id')->get()->pluck('test_id');
+        } else {
+            $answeredTests = [];
+        }
 
-        //return view('test_list')->with([
+
         return view('test_list')->with([
-            'tests' => Test::where('unlisted', false)->with('questions', 'questions.user', 'user')->paginate(10),
+            'tests' => Test::where('unlisted', false)->whereNotIn('id', $answeredTests)->with('questions', 'questions.user', 'user')->paginate(10),
         ]);
     }
 
