@@ -17,11 +17,11 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
 
             // What user created the comment
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             // What thing this comment this belongs to
-            $table->integer('owner_id')->unsigned();
+            $table->integer('owner_id')->index()->unsigned();
             $table->string('owner_type');
 
             // The comment itself

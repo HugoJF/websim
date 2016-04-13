@@ -74,6 +74,8 @@ class TestAttemptsController extends Controller
         // Get the question remaining in the test
         $question = $remainingQuestions[$remainingQuestions->keys()[$questionIndex]];
 
+        $question->load('comments', 'comments.user');
+
         return view('question')->with([
             'attempt'          => $attempt,
             'question'         => $question,

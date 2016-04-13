@@ -17,11 +17,11 @@ class CreateTestsAttemptsTable extends Migration
             $table->increments('id');
 
             // What user created the attempt
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             // What test user is attempting
-            $table->integer('test_id')->unsigned();
+            $table->integer('test_id')->index()->unsigned();
             $table->foreign('test_id')->references('id')->on('tests');
 
             // If attempt is finished

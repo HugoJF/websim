@@ -123,11 +123,7 @@ class Question extends Model
 
     public function getUserVote($id)
     {
-        foreach ($this->votes as $vote) {
-            if ($vote->user->id == $id) {
-                return $vote;
-            }
-        }
+        return $this->votes->where('user_id', $id)->first();
     }
 
     public function getCorrectAnswersPercentage()

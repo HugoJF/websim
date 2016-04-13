@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
 
             // What user created the question
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->index()->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
             // The question title

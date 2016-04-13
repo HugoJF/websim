@@ -17,11 +17,11 @@ class CreateQuestionTestTable extends Migration
             $table->increments('id');
 
             // What test entry is pointing
-            $table->integer('test_id')->unsigned();
+            $table->integer('test_id')->index()->unsigned();
             $table->foreign('test_id')->references('id')->on('tests');
 
             // What question entry is pointing
-            $table->integer('question_id')->unsigned();
+            $table->integer('question_id')->index()->unsigned();
             $table->foreign('question_id')->references('id')->on('questions');
 
             // Timestamps

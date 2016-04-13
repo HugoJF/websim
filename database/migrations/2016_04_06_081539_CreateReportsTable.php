@@ -19,10 +19,10 @@ class CreateReportsTable extends Migration
 
             $table->text('details');
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->integer('owner_id')->unsigned();
+            $table->integer('owner_id')->index()->unsigned();
             $table->string('owner_type');
 
             $table->timestamps();

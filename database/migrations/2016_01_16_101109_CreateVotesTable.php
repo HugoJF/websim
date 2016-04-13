@@ -17,11 +17,11 @@ class CreateVotesTable extends Migration
             $table->increments('id');
 
             // Polymorphic relation
-            $table->integer('owner_id')->unsigned();
+            $table->integer('owner_id')->index()->unsigned();
             $table->string('owner_type');
 
             // User
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             // TRUE if positive, FALSE if negative

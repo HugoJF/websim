@@ -5,7 +5,6 @@
         <div class="pull-right" id="rating">
 
             {{ Form::open(['url' => route('questionsVote', ['question_id' => $question->id]), 'style' => 'display: inline']) }}
-                {{ Form::hidden('question_id', $question->id) }}
                 {{ Form::hidden('direction', 'true') }}
 
                 <button type="submit" class="btn btn-link">

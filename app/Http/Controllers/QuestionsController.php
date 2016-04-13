@@ -23,7 +23,7 @@ class QuestionsController extends Controller
         }
 
         return view('question_list')->with([
-            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'answers'])->whereNotIn('id', $answeredQuestions)->paginate(10),
+            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'votes.user', 'answers'])->whereNotIn('id', $answeredQuestions)->paginate(10),
         ]);
     }
 

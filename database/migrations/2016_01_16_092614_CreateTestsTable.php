@@ -20,7 +20,7 @@ class CreateTestsTable extends Migration
             $table->string('name');
 
             // What user created the test
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             // If the test is unlisted

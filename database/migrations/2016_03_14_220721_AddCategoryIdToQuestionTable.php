@@ -13,7 +13,7 @@ class AddCategoryIdToQuestionTable extends Migration
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('category_id')->index()->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
