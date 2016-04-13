@@ -41,7 +41,7 @@ class AnswersController extends Controller
         if ($answer->test_id == null) {
             return redirect()->route('questionsView', ['question_id' => $answer->question_id]);
         } else {
-            return redirect()->route('attemptContinue', ['attempt_id' => $answer->attempt_id]);
+            return redirect()->route('attemptsContinue', ['attempt_id' => $answer->attempt_id]);
         }
     }
 }

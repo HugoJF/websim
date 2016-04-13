@@ -54,6 +54,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/test/create', 'TestController@showCreateForm')->name('testCreateForm');
     Route::get('/test/{stub}', 'TestController@stub')->where('stub', '[A-Za-z]+')->name('testViewStub');
     Route::get('/test/{test_id}', 'TestController@index')->name('testView');
+    Route::get('/test/{stub}/printable', 'TestController@stubPrintable')->where('stub', '[A-Za-z]+')->name('testViewStubPrintable'); // TODO
+    Route::get('/test/{test_id}/printable', 'TestController@viewPrintable')->name('testViewPrintable'); // TODO
 
     Route::post('/test/create', 'TestController@create')->name('testCreate');
 
@@ -84,6 +86,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile/answers', 'AnswersController@index')->name('profileAnswers');
     Route::get('/profile/questions', 'QuestionsController@myQuestions')->name('profileQuestions');
     Route::get('/profile/tests', 'TestController@myTests')->name('profileTests');
+    Route::get('/profile/settings', 'ProfileController@settings')->name('profileSettings');
+
+    Route::post('/profile/settings', 'ProfileController@settingsSubmit')->name('profileSettingsSubmit');
 
     // Categories
     Route::get('/categories/', 'CategoriesController@index')->name('categoriesIndex');

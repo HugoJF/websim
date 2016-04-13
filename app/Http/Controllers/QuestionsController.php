@@ -9,13 +9,21 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Session;
+use App\Answer;
 
 class QuestionsController extends Controller
 {
     public function listAllQuestions()
     {
+        if(\Setting::get('filter_answered_questions')) {
+            $answeredQuestions = Auth::user()->answers()->select('question_id')->get()->pluck('question_id');
+        } else
+        {
+            $answeredQuestions = [];
+        }
+
         return view('question_list')->with([
-            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'answers'])->paginate(10),
+            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'answers'])->whereNotIn('id', $answeredQuestions)->paginate(10),
         ]);
     }
 
@@ -98,7 +106,7 @@ class QuestionsController extends Controller
 
         $question->save();
 
-        return redirect($question->getViewLink());
+        return redirect($question->getViewURL());
     }
 
     public function showFlagForm($question_id)

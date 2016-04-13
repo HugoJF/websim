@@ -69,14 +69,17 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-btn fa-2x fa-exclamation-circle">
                                 @if(Auth::user()->notifications()->count() !== 0)
-                                    <span style="position: relative;top: -15px;left: -10px;color: white;background-color: red;" class="badge">{{ Auth::user()->notifications()->count() }}</span>
+                                    <span style="position: relative;top: -15px;left: -10px;color: white;background-color: red;"
+                                          class="badge">{{ Auth::user()->notifications()->count() }}</span>
                                 @endif
                             </i>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            @foreach(Auth::user()->notifications()->get() as $notification)
+                            @forelse(Auth::user()->notifications()->get() as $notification)
                                 <li><a>{{ $notification->notification }}</a></li>
-                            @endforeach
+                            @empty
+                                <li><a>No new notifications!</a></li>
+                            @endforelse
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -85,18 +88,29 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('profileSummary') }}"><i class="fa fa-btn fa-list"></i>Summary</a>
+                            <li>
+                                <a href="{{ route('profileSummary') }}"><i class="fa fa-btn fa-list"></i>Summary</a>
                             </li>
-                            <li><a href="{{ route('profileAttempts') }}"><i class="fa fa-btn fa-tasks"></i>My
-                                    Attempts</a></li>
-                            <li><a href="{{ route('profileAnswers') }}"><i class="fa fa-btn fa-check-square"></i>My
-                                    Answers</a></li>
-                            <li><a href="{{ route('profileQuestions') }}"><i class="fa fa-btn fa-pencil"></i>My
-                                    Questions</a></li>
-                            <li><a href="{{ route('profileTests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a>
+                            <li>
+                                <a href="{{ route('profileAttempts') }}"><i class="fa fa-btn fa-tasks"></i>My Attempts</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('profileAnswers') }}"><i class="fa fa-btn fa-check-square"></i>My Answers</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('profileQuestions') }}"><i class="fa fa-btn fa-pencil"></i>My Questions</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('profileTests') }}"><i class="fa fa-btn fa-file-text-o "></i>My Tests</a>
+                            </li>
+                            </li>
+                            <li>
+                                <a href="{{ route('profileSettings') }}"><i class="fa fa-btn fa-cog "></i>Settings</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="{{ route('authLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li>
+                                <a href="{{ route('authLogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                            </li>
                         </ul>
                     </li>
                 @endif

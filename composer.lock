@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df5d9d90b44c780b2955baa559c9db53",
-    "content-hash": "39011d19686b9043ca5d5621b4204b3f",
+    "hash": "4c31a9b05373d7ac6ddf2b6cb12e2ef5",
+    "content-hash": "c41519e9dd0ed7166dc1a20c14878ace",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -734,6 +734,50 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "grimthorr/laravel-user-settings",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grimthorr/laravel-user-settings.git",
+                "reference": "d894fb52973195a8ba032b3db2d6fb34fc9c82f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grimthorr/laravel-user-settings/zipball/d894fb52973195a8ba032b3db2d6fb34fc9c82f9",
+                "reference": "d894fb52973195a8ba032b3db2d6fb34fc9c82f9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.*",
+                "illuminate/database": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Grimthorr\\LaravelUserSettings\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grimthorr",
+                    "email": "phil@hughesbox.co.uk",
+                    "homepage": "http://hughesbox.co.uk"
+                }
+            ],
+            "description": "Simple user settings facade for Laravel 5.",
+            "homepage": "https://github.com/Grimthorr/laravel-user-settings",
+            "time": "2015-12-29 16:37:37"
         },
         {
             "name": "jakub-onderka/php-console-color",

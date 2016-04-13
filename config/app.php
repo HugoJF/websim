@@ -165,6 +165,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        Grimthorr\LaravelUserSettings\ServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'Form'     => Collective\Html\FormFacade::class,
         'HTML'     => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Setting'  => Grimthorr\LaravelUserSettings\Facade::class,
     ],
 
 ];

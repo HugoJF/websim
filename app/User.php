@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function answers()
     {
-        return $this->hasMany('App\Answers');
+        return $this->hasMany('App\Answer');
     }
 
     public function categories()
