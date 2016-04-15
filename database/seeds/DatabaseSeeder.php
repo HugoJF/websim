@@ -88,5 +88,9 @@ class DatabaseSeeder extends Seeder
             $q->category()->associate(App\Category::all()->random());
             $q->save();
         });
+
+        factory(App\School::class, 25)->create([
+            'owner_id' => \App\User::all()->random()->id,
+        ]);
     }
 }

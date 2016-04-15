@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Input;
 use Setting;
+use App\School;
 
 class ProfileController extends Controller
 {
@@ -24,6 +25,10 @@ class ProfileController extends Controller
     {
         Setting::set('filter_answered_questions', Input::has('filter_answered_questions'));
         Setting::set('filter_answered_tests', Input::has('filter_answered_tests'));
+
+        Auth::user()->school()->associate(School::where('code', Input::get('school_code'))->first());
+
+        Auth::user()->save();
 
         Setting::save();
 

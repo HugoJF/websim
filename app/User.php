@@ -64,6 +64,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Notification');
     }
 
+    public function school()
+    {
+        return $this->belongsTo('App\School');
+    }
+
+    public function ownedSchool()
+    {
+        return $this->hasOne('App\School');
+    }
+
     /**
      * Check if user is Administrator.
      *
@@ -76,11 +86,15 @@ class User extends Authenticatable
 
     public function canAnswerQuestions()
     {
-        return $this->answers()->today()->count() <= 25;
+        return $this->answers()->today()->count() <= 5 || $this->school;
     }
 
     public function remainingQuestions()
     {
-        return 25 - $this->answers()->today()->count();
+        if(\Auth::user()->school) {
+            return 1000;
+        } else {
+            return 5 - $this->answers()->today()->count();
+        }
     }
 }

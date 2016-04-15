@@ -113,7 +113,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/categories/add', 'CategoriesController@submit')->name('categoriesSubmit');
 
     Route::get('/debug', function () {
-        return Auth::user()->remainingQuestions();
+        dd(Auth::user()->canAnswerQuestions());
     });
 
 });

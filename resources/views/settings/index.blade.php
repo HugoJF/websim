@@ -22,6 +22,11 @@
                     </label>
                 </div>
 
+                <div class="form-group">
+                    {{ Form::label('School code:') }}
+                    {{ Form::text('school_code', Auth::user()->school ? Auth::user()->school->code : '' , ['class' => 'form-control']) }}
+                </div>
+
                 {{ Form::submit('Save settings', array('class' => 'btn btn-block btn-primary')) }}
 
 
