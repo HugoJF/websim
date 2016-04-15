@@ -73,4 +73,14 @@ class User extends Authenticatable
     {
         return $this->type == 'admin';
     }
+
+    public function canAnswerQuestions()
+    {
+        return $this->answers()->today()->count() <= 25;
+    }
+
+    public function remainingQuestions()
+    {
+        return 25 - $this->answers()->today()->count();
+    }
 }

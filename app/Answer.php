@@ -47,4 +47,9 @@ class Answer extends Model
     {
         return $this->question->isCorrect($this->answer);
     }
+
+    public function scopeToday($query)
+    {
+        return $query->whereDay('created_at', '=', date('d'));
+    }
 }

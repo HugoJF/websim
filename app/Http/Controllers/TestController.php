@@ -36,7 +36,7 @@ class TestController extends Controller
     public function listTests()
     {
         if(\Setting::get('filter_answered_tests')) {
-            $answeredTests = Auth::user()->testAttempts()->where('finished', 1)->select('test_id')->get()->pluck('test_id');
+            $answeredTests = Auth::user()->testAttempts()->finished()->select('test_id')->get()->pluck('test_id');
         } else {
             $answeredTests = [];
         }

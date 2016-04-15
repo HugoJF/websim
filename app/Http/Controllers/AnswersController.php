@@ -18,12 +18,15 @@ class AnswersController extends Controller
 
     public function submit(Request $request)
     {
+        if (!Auth::user()->canAnswerQuestions()) {
+            return 'You can\'t answer more questions today';
+        }
         $this->validate($request, [
-            'answer'      => 'required',
+            'answer' => 'required',
             'question_id' => 'required',
-            'attempt_id'  => 'required',
-            'test_id'     => 'required',
-            'user_id'     => 'required',
+            'attempt_id' => 'required',
+            'test_id' => 'required',
+            'user_id' => 'required',
         ]);
 
         if (Input::get('user_id') != Auth::user()->id) {
