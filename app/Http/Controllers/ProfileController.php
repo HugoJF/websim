@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\School;
 use Illuminate\Support\Facades\Input;
 use Setting;
-use App\School;
 
 class ProfileController extends Controller
 {
@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
         $school = School::where('code', Input::get('school_code'))->first();
 
-        if(is_null($school) && !empty(Input::get('school_code'))) {
+        if (is_null($school) && !empty(Input::get('school_code'))) {
             \Session::flash('danger', 'Invalid school code.');
         }
 
