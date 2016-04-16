@@ -4,6 +4,7 @@ namespace App;
 
 use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Question extends Model
 {

@@ -94,6 +94,12 @@ class TestController extends Controller
 
         $test = Test::find(Input::get('test_id'));
 
+        if(!is_null($test->questions()->find($questionId))) {
+            \Session::flash('danger', 'You can\' add duplicate questions in a test');
+
+            return redirect()->route('testView', ['test_id' => $test->id]);
+        }
+
         $test->questions()->save($question);
 
         return redirect()->route('testView', ['test_id' => $test->id]);
