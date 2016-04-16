@@ -23,10 +23,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('home')->with([
-            'test_attempts' => Auth::user()->testAttempts()->unfinished()->limit(2)->get(),
-            'userCount' => User::count(),
-            'testCount' => Test::count(),
-            'questionCount' => Question::count(),
+            'test_attempts'    => Auth::user()->testAttempts()->unfinished()->limit(2)->get(),
+            'userCount'        => User::count(),
+            'testCount'        => Test::count(),
+            'questionCount'    => Question::count(),
             'testAttemptCount' => TestAttempt::count(),
         ]);
     }

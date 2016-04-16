@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Test;
-use App\TestAttempt;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -41,9 +40,8 @@ class TestController extends Controller
             $answeredTests = [];
         }
 
-
         return view('test_list')->with([
-            'tests' => Test::where('unlisted', false)->whereNotIn('id', $answeredTests)->with('questions', 'questions.user', 'user')->paginate(10),
+            'tests' => Test::listed()->whereNotIn('id', $answeredTests)->with('questions', 'questions.user', 'user')->paginate(10),
         ]);
     }
 

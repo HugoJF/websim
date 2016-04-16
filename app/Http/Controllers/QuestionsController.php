@@ -9,16 +9,14 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Session;
-use App\Answer;
 
 class QuestionsController extends Controller
 {
     public function listAllQuestions()
     {
-        if(\Setting::get('filter_answered_questions')) {
+        if (\Setting::get('filter_answered_questions')) {
             $answeredQuestions = Auth::user()->answers()->select('question_id')->get()->pluck('question_id');
-        } else
-        {
+        } else {
             $answeredQuestions = [];
         }
 

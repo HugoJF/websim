@@ -63,4 +63,14 @@ class Test extends Model
     {
         return $this->questions->count();
     }
+
+    public function scopeUnlisted($query)
+    {
+        return $query->where('unlisted', true);
+    }
+
+    public function scopeListed($query)
+    {
+        return $query->where('unlisted', false);
+    }
 }
