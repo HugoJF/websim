@@ -97,4 +97,9 @@ class User extends Authenticatable
             return 5 - $this->answers()->today()->count();
         }
     }
+
+    public function hasSchoolAssociated()
+    {
+
+    }
 }

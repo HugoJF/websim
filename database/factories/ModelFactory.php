@@ -147,6 +147,7 @@ $factory->define(App\Notification::class, function (Faker\Generator $faker) {
 
 $factory->define(App\School::class, function (Faker\Generator $faker) {
     return [
-        'code' => $faker->regexify('^[a-zA-Z]{5}$')
+        'name' => $faker->sentence(2),
+        'code' => $faker->regexify('^[a-zA-Z]{5}$'),
     ];
 });

@@ -26,7 +26,13 @@ class ProfileController extends Controller
         Setting::set('filter_answered_questions', Input::has('filter_answered_questions'));
         Setting::set('filter_answered_tests', Input::has('filter_answered_tests'));
 
-        Auth::user()->school()->associate(School::where('code', Input::get('school_code'))->first());
+        $school = School::where('code', Input::get('school_code'))->first();
+
+        if(is_null($school) && !empty(Input::get('school_code'))) {
+            \Session::flash('danger', 'Invalid school code.');
+        }
+
+        Auth::user()->school()->associate($school);
 
         Auth::user()->save();
 

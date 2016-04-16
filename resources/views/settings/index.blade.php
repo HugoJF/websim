@@ -25,6 +25,9 @@
                 <div class="form-group">
                     {{ Form::label('School code:') }}
                     {{ Form::text('school_code', Auth::user()->school ? Auth::user()->school->code : '' , ['class' => 'form-control']) }}
+                    @if(Auth::user()->school)
+                        Registered for school: {{ Form::label(Auth::user()->school->name) }}
+                    @endif
                 </div>
 
                 {{ Form::submit('Save settings', array('class' => 'btn btn-block btn-primary')) }}
