@@ -91,7 +91,7 @@ class User extends Authenticatable
 
     public function remainingQuestions()
     {
-        if(\Auth::user()->school) {
+        if (\Auth::user()->school) {
             return 1000;
         } else {
             return 5 - $this->answers()->today()->count();
@@ -100,6 +100,5 @@ class User extends Authenticatable
 
     public function hasSchoolAssociated()
     {
-
     }
 }

@@ -34,7 +34,7 @@ class TestController extends Controller
 
     public function listTests()
     {
-        if(\Setting::get('filter_answered_tests')) {
+        if (\Setting::get('filter_answered_tests')) {
             $answeredTests = Auth::user()->testAttempts()->finished()->select('test_id')->get()->pluck('test_id');
         } else {
             $answeredTests = [];
@@ -92,7 +92,7 @@ class TestController extends Controller
 
         $test = Test::find(Input::get('test_id'));
 
-        if(!is_null($test->questions()->find($questionId))) {
+        if (!is_null($test->questions()->find($questionId))) {
             \Session::flash('danger', 'You can\' add duplicate questions in a test');
 
             return redirect()->route('testView', ['test_id' => $test->id]);
