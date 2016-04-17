@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use View;
 use Redirect;
+use View;
 
 class CategoriesController extends Controller
 {
