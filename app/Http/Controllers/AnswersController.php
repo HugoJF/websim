@@ -26,11 +26,11 @@ class AnswersController extends Controller
             return Redirect::back();
         }
         $this->validate($request, [
-            'answer' => 'required',
+            'answer'      => 'required',
             'question_id' => 'required',
-            'attempt_id' => 'required',
-            'test_id' => 'required',
-            'user_id' => 'required',
+            'attempt_id'  => 'required',
+            'test_id'     => 'required',
+            'user_id'     => 'required',
         ]);
 
         if (Input::get('user_id') != Auth::id()) {

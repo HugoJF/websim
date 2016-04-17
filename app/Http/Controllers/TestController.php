@@ -34,7 +34,11 @@ class TestController extends Controller
 
     public function listTests()
     {
+<<<<<<< HEAD
         if(Setting::get('filter_answered_tests')) {
+=======
+        if (\Setting::get('filter_answered_tests')) {
+>>>>>>> 914525ecb888870f55a4a75a8f95e4318e830658
             $answeredTests = Auth::user()->testAttempts()->finished()->select('test_id')->get()->pluck('test_id');
         } else {
             $answeredTests = [];
