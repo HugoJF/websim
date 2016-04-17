@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 @foreach($tests as $test_index => $test)
                     @include('partials.test', array(
-                        'test' => $test,
+                        'tests.view' => $test,
                         'showAlternatives' => false
                     ))
                     <br><br>

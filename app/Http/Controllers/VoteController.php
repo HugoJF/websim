@@ -12,36 +12,24 @@ use Illuminate\Support\Facades\Input;
 
 class VoteController extends Controller
 {
-    public function dooo()
+    public function questionVote($id, Request $request)
     {
-        $vote = new Vote();
-
-        $vote->user()->associate(Auth::user());
-        $vote->owner()->associate(Comment::find(1));
-
-        $vote->direction = true;
-
-        return $vote;
+        return $this->handleVote(Question::find($id), $request);
     }
 
-    public function questionVote($id, Request $r)
+    public function testVote($id, Request $request)
     {
-        return $this->handleVote(Question::find($id), $r);
+        return $this->handleVote(Test::find($id), $request);
     }
 
-    public function testVote($id, Request $r)
+    public function commentVote($id, Request $request)
     {
-        return $this->handleVote(Test::find($id), $r);
+        return $this->handleVote(Comment::find($id), $request);
     }
 
-    public function commentVote($id, Request $r)
+    private function handleVote($model, $request)
     {
-        return $this->handleVote(Comment::find($id), $r);
-    }
-
-    private function handleVote($model, $r)
-    {
-        $this->validate($r, [
+        $this->validate($request, [
             'direction' => 'required',
         ]);
 
@@ -49,7 +37,7 @@ class VoteController extends Controller
 
         // Tries to find a vote for the same question
         $vote = $model->votes()->where([
-            'user_id'     => Auth::user()->id,
+            'user_id' => Auth::id(),
         ])->get();
 
         // If there is no vote for this question, create one
@@ -64,7 +52,7 @@ class VoteController extends Controller
 
         // If the user is trying to send the same vote, delete the vote
 
-        if ($vote->direction !== null && $vote->direction == $direction) {
+        if (!is_null($vote->direction) && $vote->direction == $direction) {
             $vote->delete();
         } else {
             // Change de direction of the vote
@@ -76,6 +64,6 @@ class VoteController extends Controller
 
         // Redirect to page
         // TODO Custom redirect
-        return redirect()->route('questionsView', ['question_id' => $model->id]);
+        return Redirect::route('questionsView', ['question_id' => $model->id]);
     }
 }

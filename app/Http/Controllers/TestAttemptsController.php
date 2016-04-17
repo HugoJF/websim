@@ -7,6 +7,9 @@ use App\Question;
 use App\Test;
 use App\TestAttempt;
 use Auth;
+use Redirect;
+use View;
+
 
 class TestAttemptsController extends Controller
 {
@@ -14,12 +17,10 @@ class TestAttemptsController extends Controller
     {
         $user = Auth::user();
 
-        $testAttempts = TestAttempt::where('user_id', $user->id);
+        $testAttempts = $user->testAttempts()->get();
 
         //return $testAttempts->first()->toJson();
-        return view('attempts')->with([
-            'testAttempts' => $testAttempts->get(),
-        ]);
+        return View::make('attempts.list')->with(compact('testAttempts'));
     }
 
     public function continueTest($attempt_id = -1, $offsetAmount = 0)
@@ -27,25 +28,20 @@ class TestAttemptsController extends Controller
         $user = Auth::user();
 
         // Get the attempt with Test and Questions ORM Objects
-        $attempt = TestAttempt::with('test')->where([
-            'id'      => $attempt_id,
-            'user_id' => $user->id,
-        ])->first();
+        $attempt = $user->testAttempts()->with('test')->find($attempt_id);
 
         // Redirect to homepage if test is already completed
         if ($attempt->finished === true) {
-            return redirect()->route('attemptsResult', ['attempt_id' => $attempt_id]);
+            return Redirect::route('attemptsResult', ['attempt_id' => $attempt_id]);
         }
 
         // Test questions
         $testQuestions = $attempt->test->questions;
 
-        //dd($testQuestions->toArray());
 
         // Get every answer for questions
         $attemptsAnsweredQuestions = Answer::where('attempt_id', $attempt->id)->get();
 
-        //dd($attemptsAnsweredQuestions->toArray());
 
         // Remove question that have answers in the database
         $remainingQuestions = $testQuestions->reject(function ($question) use ($attemptsAnsweredQuestions) {
@@ -53,8 +49,6 @@ class TestAttemptsController extends Controller
                 return $value->question_id == $question->id;
             });
         });
-
-        //dd($remainingQuestions->count());
 
         // Debug remaining questions
         \Debugbar::info('There are '.$remainingQuestions->count().' questions remaining in this test attempt.');
@@ -64,7 +58,7 @@ class TestAttemptsController extends Controller
             $attempt->finished = true;
             $attempt->save();
 
-            return redirect()->route('attemptsResult', ['attempt_id' => $attempt_id]);
+            return Redirect::route('attemptsResult', ['attempt_id' => $attempt_id]);
         }
 
         $questionIndex = $offsetAmount % ($remainingQuestions->count());
@@ -76,11 +70,9 @@ class TestAttemptsController extends Controller
 
         $question->load('comments', 'comments.user');
 
-        return view('question')->with([
-            'attempt'          => $attempt,
-            'question'         => $question,
-            'skipQuestionPath' => route('attemptsContinueWithSkip', ['attempt_id' => $attempt->id, 'question_index' => $questionIndex + 1]),
-        ]);
+        $skipQuestionPath = route('attemptsContinueWithSkip', ['attempt_id' => $attempt->id, 'question_index' => $questionIndex + 1]);
+
+        return View::make('questions.view')->with(compact('attempt', 'question', 'skipQuestionPath'));
     }
 
     public function createAttempt($test_id = -1)
@@ -88,14 +80,10 @@ class TestAttemptsController extends Controller
         $user = Auth::user();
 
         // Get unfinished attempts for the test
-        $attempts = TestAttempt::where([
-            'user_id'  => $user->id,
-            'test_id'  => $test_id,
-            'finished' => 0,
-        ])->orderBy('created_at', 'desc');
+        $attempts = $user->testAttempts()->unfinished()->where('test_id', $test_id)->orderBy('created_at', 'desc');
 
         // Create new attempt if there are not attempts in DB
-        if ($attempts->get()->count() == 0) {
+        if ($attempts->count() == 0) {
             $attempt = new TestAttempt();
 
             $attempt->user_id = $user->id;
@@ -103,20 +91,18 @@ class TestAttemptsController extends Controller
             $attempt->finished = false;
 
             $attempt->save();
-        } elseif ($attempts->get()->count() >= 2) {
+        } elseif ($attempts->count() >= 2) {
             //Invalid amount of attempts
             return 'More than 1';
         }
 
-        return redirect()->route('attemptsContinue', ['attempt_id' => $attempts->first()->id]);
+        return Redirect::route('attemptsContinue', ['attempt_id' => $attempts->first()->id]);
     }
 
     public function result($attempt_id = -1)
     {
         $attempt = TestAttempt::with('answers', 'answers.question', 'answers.question.user')->find($attempt_id);
 
-        return view('attempt_result')->with([
-            'attempt' => $attempt,
-        ]);
+        return View::make('attempts.result')->with(compact('attempt'));
     }
 }

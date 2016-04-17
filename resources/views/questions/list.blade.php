@@ -8,7 +8,7 @@
                 <br>
                 @forelse($questions as $question)
                     @include('partials.question', array(
-                        'question' => $question
+                        'questions.view' => $question
                     ))
                 @empty
                     @if(isset($query))

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use View;
+use Redirect;
 
 class CategoriesController extends Controller
 {
@@ -15,24 +17,16 @@ class CategoriesController extends Controller
 
     public function show($id = -1)
     {
-        return view('categories_list')->with([
-            'categories' => Category::find($id)->descendantsAndSelf()->orderBy('name')->get()->toHierarchy(),
-        ]);
+        $categories = Category::find($id)->descendantsAndSelf()->orderBy('name')->get()->toHierarchy();
+
+        return View::make('categories.list')->with(compact('categories'));
     }
 
-    public function json()
+    public function showAddForm($parent_category_id = -1)
     {
-        //return Category::all()->toHierarchy();
-        //dd(Category::find(229)->ancestors()->orderBy('categories.lft'));
-        return Category::find(229)->ancestors()->orderBy('categories.lft')->get();
-    }
+        $category = Category::find($parent_category_id);
 
-    public function showAddForm($category_id = -1)
-    {
-        return view('add_category')->with([
-            'category'           => Category::find($category_id),
-            'parent_category_id' => $category_id,
-        ]);
+        return View::make('categories.submitForm')->with(compact('category', 'parent_category_id'));
     }
 
     public function submit(Request $request)
@@ -42,11 +36,9 @@ class CategoriesController extends Controller
             'parent_category' => 'required',
         ]);
 
-        \Debugbar::info(Input::all());
-
         $parentCategory = Category::find(Input::get('parent_category'));
 
-        if ($parentCategory == null) {
+        if (is_null($parentCategory)) {
             return back();
         }
 
@@ -55,6 +47,6 @@ class CategoriesController extends Controller
             'name'      => Input::get('category_name'),
         ]);
 
-        return redirect($newCategory->getViewLink());
+        return Redirect::to($newCategory->getViewLink());
     }
 }

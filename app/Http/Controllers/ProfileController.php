@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Setting;
 use App\School;
+use Session;
+use Auth;
+use Redirect;
 
 class ProfileController extends Controller
 {
@@ -28,7 +31,7 @@ class ProfileController extends Controller
         $school = School::where('code', Input::get('school_code'))->first();
 
         if(is_null($school) && !empty(Input::get('school_code'))) {
-            \Session::flash('danger', 'Invalid school code.');
+            Session::flash('danger', 'Invalid school code.');
         }
 
         Auth::user()->school()->associate($school);
@@ -37,8 +40,8 @@ class ProfileController extends Controller
 
         Setting::save();
 
-        \Session::flash('success', 'Configuration saved!');
+        Session::flash('success', 'Configuration saved!');
 
-        return redirect()->route('profileSettings');
+        return Redirect::route('profileSettings');
     }
 }

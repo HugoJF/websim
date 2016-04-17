@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\Test;
 use Auth;
+use View;
+use Setting;
+use Session;
+use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -18,38 +22,34 @@ class TestController extends Controller
             return 'Unlisted test, you should access it via the share link';
         }
 
-        return view('test')->with([
-            'test' => $test,
-        ]);
+        return View::make('tests.view')->with(compact('test'));
     }
 
     public function stub($stub)
     {
         $test = Test::with('user', 'questions')->where('stub', $stub)->first();
 
-        return view('test')->with([
-            'test' => $test,
-        ]);
+        return View::make('tests.view')->with(compact('test'));
     }
 
     public function listTests()
     {
-        if(\Setting::get('filter_answered_tests')) {
+        if(Setting::get('filter_answered_tests')) {
             $answeredTests = Auth::user()->testAttempts()->finished()->select('test_id')->get()->pluck('test_id');
         } else {
             $answeredTests = [];
         }
 
-        return view('test_list')->with([
-            'tests' => Test::listed()->whereNotIn('id', $answeredTests)->with('questions', 'questions.user', 'user')->paginate(10),
-        ]);
+        $tests = Test::listed()->whereNotIn('id', $answeredTests)->with('questions', 'questions.user', 'user')->paginate(10);
+
+        return View::make('tests.list')->with(compact('tests'));
     }
 
     public function myTests()
     {
-        return view('test_list')->with([
-            'tests' => Auth::user()->tests()->paginate(10),
-        ]);
+        $tests = Auth::user()->tests()->paginate(10);
+
+        return View::make('tests.list')->with(compact('tests'));
     }
 
     public function create(Request $request)
@@ -63,23 +63,24 @@ class TestController extends Controller
         $test = new Test();
 
         $test->name = Input::get('test_name');
+
         $test->user()->associate(Auth::user());
 
         $test->save();
 
-        return redirect()->route('testView', ['test_id' => $test->id]);
+        return Redirect::route('testView', ['test_id' => $test->id]);
     }
 
     public function showCreateForm()
     {
-        return view('add_test');
+        return View::make('tests.submitForm');
     }
 
     public function showAddQuestionForm()
     {
-        return view('add_question_to_test')->with([
-            'tests' => Auth::user()->tests()->get(),
-        ]);
+        $tests = Auth::user()->tests()->get();
+
+        return View::make('questions.addToTestForm')->with(compact('tests'));
     }
 
     public function addQuestion($questionId, Request $request)
@@ -93,13 +94,13 @@ class TestController extends Controller
         $test = Test::find(Input::get('test_id'));
 
         if(!is_null($test->questions()->find($questionId))) {
-            \Session::flash('danger', 'You can\' add duplicate questions in a test');
+           Session::flash('danger', 'You can\' add duplicate questions in a test');
 
-            return redirect()->route('testView', ['test_id' => $test->id]);
+            return Redirect::route('testView', ['test_id' => $test->id]);
         }
 
         $test->questions()->save($question);
 
-        return redirect()->route('testView', ['test_id' => $test->id]);
+        return Redirect::route('testView', ['test_id' => $test->id]);
     }
 }

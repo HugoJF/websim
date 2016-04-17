@@ -9,73 +9,70 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Session;
+use Setting;
+use Redirect;
+use View;
 
 class QuestionsController extends Controller
 {
     public function listAllQuestions()
     {
-        if (\Setting::get('filter_answered_questions')) {
+        if (Setting::get('filter_answered_questions')) {
             $answeredQuestions = Auth::user()->answers()->select('question_id')->get()->pluck('question_id');
         } else {
             $answeredQuestions = [];
         }
 
-        return view('question_list')->with([
-            'questions' => Question::with(['user', 'votes' => function ($query) { $query->where('user_id', Auth::user()->id); }, 'votes.user', 'answers'])->whereNotIn('id', $answeredQuestions)->paginate(10),
-        ]);
+        $questions = Question::with([
+            'votes' => function ($query) {
+                $query->where('user_id', Auth::id());
+            },
+            'votes.user',
+            'user',
+            'answers',
+        ])->whereNotIn('id', $answeredQuestions)->paginate(10);
+
+        return View::make('questions.list')->with(compact('questions'));
     }
 
     public function viewQuestion($id = -1)
     {
         $question = Question::with('user', 'votes', 'votes.user', 'comments', 'comments.user')->find($id);
 
-        return view('question')->with([
-            'question' => $question,
-        ]);
-    }
-
-    public function viewQuestionComments($question_id = -1)
-    {
-        return Question::find($question_id)->comments()->with('votes', 'user')->get();
-        //return Question::find(1)->votes()->get();
+        return View::make('questions.view')->with(compact('question'));
     }
 
     public function category($category_id = -1)
     {
         $categories = Category::find($category_id)->getDescendantsAndSelf()->pluck('id');
+        $questions = Question::with('user')->whereIn('category_id', $categories)->paginate(10);
 
-        //return Question::with('user')->whereIn('category_id', $categories)->paginate(10);
-        return view('question_list')->with([
-            'questions' => Question::with('user')->whereIn('category_id', $categories)->paginate(10),
-        ]);
+        return View::make('questions.list')->with(compact('questions'));
     }
 
     public function search()
     {
         if (Input::has('query')) {
-            return view('question_list')->with([
-                'questions' => Question::where('question_title', 'LIKE', '%'.Input::get('query').'%')->paginate(10)->appends(Input::except('page')),
-                'query'     => Input::get('query'),
+            $questions = Question::where('question_title', 'LIKE', '%'.Input::get('query').'%')->paginate(10)->appends(Input::except('page'));
+            $query = Input::get('query');
 
-            ]);
+            return View::make('questions.list')->with(compact('questions', 'query'));
         } else {
-            return view('question_search_form');
+            return View::make('questions.searchForm');
         }
     }
 
     public function showSubmitForm()
     {
-        $categories = Category::all();
+        $categoriesORM = Category::all(['id', 'depth', 'name']);
 
-        $select = [];
+        $categories = [];
 
-        foreach ($categories as $category) {
-            $select[$category->id] = str_repeat('― ', $category->depth).$category->name;
+        foreach ($categoriesORM as $category) {
+            $categories[$category->id] = str_repeat('― ', $category->depth).$category->name;
         }
 
-        return view('submit_question')->with([
-            'categories' => $select,
-        ]);
+        return View::make('questions.submitForm')->with(compact('categories'));
     }
 
     public function submit(Request $request)
@@ -90,7 +87,7 @@ class QuestionsController extends Controller
 
         $question = new Question();
 
-        $question->user()->associate(Auth::user()->id);
+        $question->user()->associate(Auth::id());
 
         $question->category_id = Input::get('category_id');
 
@@ -104,14 +101,13 @@ class QuestionsController extends Controller
 
         $question->save();
 
-        return redirect($question->getViewURL());
+        return Redirect::to($question->getViewURL());
     }
 
     public function showFlagForm($question_id)
     {
-        return view('flag_form')->with([
-            'question' => Question::find($question_id),
-        ]);
+        $question = Question::find($question_id);
+        return view('flagging.submitForm')->with(compact('question'));
     }
 
     public function flag(Request $request, $question_id)
@@ -120,6 +116,7 @@ class QuestionsController extends Controller
             'reason'  => 'required',
             'details' => 'required',
         ]);
+
         $report = new Report(Input::all());
 
         $report->owner()->associate(Question::find($question_id));
@@ -127,25 +124,24 @@ class QuestionsController extends Controller
 
         $report->save();
 
-        $request->session()->flash('success', 'Report submitted sucessfully!');
+        Session::flash('success', 'Report submitted sucessfully!');
 
-        return redirect()->back();
+        return Redirect::back();
     }
 
     public function showEditForm($question_id)
     {
-        $categories = Category::all();
+        $categoriesORM = Category::all();
 
-        $select = [];
+        $categories = [];
 
-        foreach ($categories as $category) {
+        foreach ($categoriesORM as $category) {
             $select[$category->id] = str_repeat('― ', $category->depth).$category->name;
         }
 
-        return view('edit_question')->with([
-            'question'   => Question::find($question_id),
-            'categories' => $select,
-        ]);
+        $question = Question::find($question_id);
+
+        return View::make('question.editForm')->with(compact('question', 'categories'));
     }
 
     public function edit(Request $request, $question_id)
@@ -174,13 +170,13 @@ class QuestionsController extends Controller
 
         Session::flash('success', 'Question updated successfully');
 
-        return redirect($question->getViewURL());
+        return Redirect::to($question->getViewURL());
     }
 
     public function myQuestions()
     {
-        return view('question_list')->with([
-            'questions' => Auth::user()->questions()->paginate(10),
-        ]);
+        $questions = Auth::user()->questions()->paginate(10);
+
+        return View::make('questions.list')->with(compact('questions'));
     }
 }

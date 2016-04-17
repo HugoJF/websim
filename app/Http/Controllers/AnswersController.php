@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Auth;
+use View;
+use Session;
+use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -11,15 +14,16 @@ class AnswersController extends Controller
 {
     public function index()
     {
-        return view('answers_list')->with([
-            'answers' => Answer::where('user_id', Auth::user()->id)->get(),
-        ]);
+        $answers = Answer::where('user_id', Auth::id())->get();
+
+        return View::make('answers.list')->with(compact('answers'));
     }
 
     public function submit(Request $request)
     {
         if (!Auth::user()->canAnswerQuestions()) {
-            return 'You can\'t answer more questions today';
+            Session::flash('danger', 'You can\'t answers more questions today!');
+            return Redirect::back();
         }
         $this->validate($request, [
             'answer' => 'required',
@@ -29,22 +33,22 @@ class AnswersController extends Controller
             'user_id' => 'required',
         ]);
 
-        if (Input::get('user_id') != Auth::user()->id) {
+        if (Input::get('user_id') != Auth::id()) {
             return 'Error: you\'re trying to create an answer for another user';
         }
 
-        \Debugbar::info(Input::all());
-
-        $answer = new Answer();
-
-        $answer->fill(Input::all());
+        $answer = new Answer(Input::all());
 
         $answer->save();
 
-        if ($answer->test_id == null) {
-            return redirect()->route('questionsView', ['question_id' => $answer->question_id]);
+        if (is_null($answer->test_id)) {
+            return Redirect::route('questionsView', [
+                'question_id' => $answer->question_id,
+            ]);
         } else {
-            return redirect()->route('attemptsContinue', ['attempt_id' => $answer->attempt_id]);
+            return Redirect::route('attemptsContinue', [
+                'attempt_id' => $answer->attempt_id,
+            ]);
         }
     }
 }

@@ -9,14 +9,14 @@
                 <br>
 
                 <div class="row">
-                    @forelse($test_attempts as $test_attempt)
+                    @forelse($testAttempts as $testAttempt)
                         <div class="col-md-6">
                             <div class="jumbotron">
                                 <h2>Unfinished attempt</h2>
 
-                                <p>You started test {{ $test_attempt->test->name }} and still didn't finish</p>
+                                <p>You started test {{ $testAttempt->test->name }} and still didn't finish</p>
 
-                                <p><a class="btn btn-primary btn-lg" href="{{ $test_attempt->getViewURL() }}"
+                                <p><a class="btn btn-primary btn-lg" href="{{ $testAttempt->getViewURL() }}"
                                       role="button">Continue</a></p>
                             </div>
                         </div>
