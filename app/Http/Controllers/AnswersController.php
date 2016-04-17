@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Auth;
-use View;
-use Session;
-use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Redirect;
+use Session;
+use View;
 
 class AnswersController extends Controller
 {
@@ -23,6 +23,7 @@ class AnswersController extends Controller
     {
         if (!Auth::user()->canAnswerQuestions()) {
             Session::flash('danger', 'You can\'t answers more questions today!');
+
             return Redirect::back();
         }
         $this->validate($request, [
