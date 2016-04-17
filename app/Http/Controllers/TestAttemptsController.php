@@ -10,7 +10,6 @@ use Auth;
 use Redirect;
 use View;
 
-
 class TestAttemptsController extends Controller
 {
     public function index()
@@ -38,10 +37,8 @@ class TestAttemptsController extends Controller
         // Test questions
         $testQuestions = $attempt->test->questions;
 
-
         // Get every answer for questions
         $attemptsAnsweredQuestions = Answer::where('attempt_id', $attempt->id)->get();
-
 
         // Remove question that have answers in the database
         $remainingQuestions = $testQuestions->reject(function ($question) use ($attemptsAnsweredQuestions) {

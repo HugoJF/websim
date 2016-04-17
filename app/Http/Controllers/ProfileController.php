@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use App\School;
 use Illuminate\Support\Facades\Input;
 use Setting;
-<<<<<<< HEAD
 use App\School;
 use Session;
 use Auth;
 use Redirect;
-=======
->>>>>>> 914525ecb888870f55a4a75a8f95e4318e830658
-
 class ProfileController extends Controller
 {
     public function summary()

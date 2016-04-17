@@ -8,9 +8,9 @@ use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Redirect;
 use Session;
 use Setting;
-use Redirect;
 use View;
 
 class QuestionsController extends Controller
@@ -107,6 +107,7 @@ class QuestionsController extends Controller
     public function showFlagForm($question_id)
     {
         $question = Question::find($question_id);
+
         return view('flagging.submitForm')->with(compact('question'));
     }
 
