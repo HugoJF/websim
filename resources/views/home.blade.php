@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Welcome, {{ Auth::user()->name }}</h1>
+                <h1>Welcome, {{ Auth::user()->name }} to Websim</h1>
 
                 <br>
 
