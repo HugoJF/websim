@@ -1,1 +1,0 @@
-{"virtualbox":{"/home/vagrant/websim":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/websim","hostpath":"C:/vagrant/websim","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/vagrant/websim","disabled":false,"__vagrantfile":true}}}
