@@ -1,27 +1,35 @@
-## Laravel PHP Framework
+# Websim
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Exam generation system
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Overview
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- Type: `project`
+- Stack: `PHP, Express, Laravel`
+- Visibility: `Public`
+- Source: `Original repository`
+- Last commit: `2020-04-29`
+- Status: Active/maintained as available.
 
-## Official Documentation
+## Requirements
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+- Node.js 18+
+- npm
+- PHP and Composer
 
-## Contributing
+## Getting Started
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+1. Clone the repository.
+2. Install dependencies:
 
-## Security Vulnerabilities
+```bash
+npm install
+```
+3. Inspect `package.json` scripts and run the appropriate command.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Notes
 
-### License
+- This README was refreshed to provide a practical project baseline.
+- Update setup commands if your workflow differs from the defaults above.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+_Generated on 2026-02-26._
